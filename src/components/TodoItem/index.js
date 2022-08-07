@@ -35,6 +35,7 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
         display="flex"
         flexDirection="column"
         component={"a"}
+        sx={{ cursor: "pointer" }}
         onClick={() => navigate(`/detail/${item.id}`, { state: item })}
       >
         <span>제목</span>
