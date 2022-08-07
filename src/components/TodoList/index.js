@@ -41,7 +41,7 @@ const TodoList = ({ todos, onCreate, onUpdate, onDelete }) => {
         </Button>
       </Stack>
       <Grid container>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           {Array.isArray(todos) &&
             todos?.map((todo) => {
               return (
@@ -54,7 +54,6 @@ const TodoList = ({ todos, onCreate, onUpdate, onDelete }) => {
               );
             })}
         </Grid>
-        <Grid item xs={12} md={6}></Grid>
       </Grid>
     </Box>
   );

@@ -27,7 +27,9 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
       [name]: value,
     });
   };
-
+  const moveDetail = (e) => {
+    navigate(`/detail/${item.id}`, { state: item });
+  };
   const { title, content } = input;
   return (
     <Box>
@@ -36,21 +38,22 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
         flexDirection="column"
         component={"a"}
         sx={{ cursor: "pointer" }}
-        onClick={() => navigate(`/detail/${item.id}`, { state: item })}
+        onClick={(e) => moveDetail(e)}
       >
         <span>제목</span>
         <Input
           disabled={!modify}
           name="title"
           value={title}
+          onClick={(e) => e.stopPropagation()}
           onChange={onChange}
         ></Input>
         <span>내용</span>
         <Input
           disabled={!modify}
-          fullWidth
           value={content}
           name="content"
+          onClick={(e) => e.stopPropagation()}
           onChange={onChange}
         ></Input>
       </Box>
