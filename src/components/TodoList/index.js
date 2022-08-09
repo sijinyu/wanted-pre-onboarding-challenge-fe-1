@@ -1,19 +1,23 @@
+import React, { useState, useCallback } from "react";
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
 
 import TodoItem from "../TodoItem";
 
 const TodoList = ({ todos, onCreate, onUpdate, onDelete }) => {
   const [input, setInput] = useState({ title: "", content: "" });
   const { title, content } = input;
-  const onChange = (e) => {
-    const { value, name } = e.target;
+  const onChange = useCallback(
+    (e) => {
+      const { value, name } = e.target;
 
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
+      setInput({
+        ...input,
+        [name]: value,
+      });
+    },
+    [input]
+  );
+  console.log("--");
   return (
     <Box>
       <Typography variant="h2" textAlign="center" mt={10}>
