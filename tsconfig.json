@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "strict": true,
     "target": "ESNext", // 사용할 특정 ECMAScript 버전 설정
@@ -12,11 +13,7 @@
     "moduleResolution": "Node", //모듈 해석 방법 설정
     "rootDir": "src", // 입력 파일의 루트 디렉토리(rootDir) 설정으로 --outDir로 결과 디렉토리 구조를 조작할 때 사용됩니다.
     "outDir": "build/dist", //해당 디렉토리로 결과 구조를 보냅니다.
-    "baseUrl": ".", //상대경로의 모듈 이름을 처리할 기준 디렉토리
-    "noEmit": true, // 결과파일 내보낼지 유무
-    "paths": {
-      // 'baseUrl'를 기준으로 모듈 이름을 처리한 기준 디렉토리
-      "@/*": ["src/*"]
-    }
-  }
+    "noEmit": true // 결과파일 내보낼지 유무
+  },
+  "include": ["src", "craco.config.js"]
 }

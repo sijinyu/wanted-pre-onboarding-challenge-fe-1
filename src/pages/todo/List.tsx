@@ -17,9 +17,9 @@ export default function List() {
   );
 
   const createApi = useMutation(createTodo, {
-    onSuccess: (response) => {
-      if (response?.response?.data?.details) {
-        alert(response.response.data.details);
+    onSuccess: (response: any) => {
+      if (response?.response!.data?.details) {
+        alert(response.response!.data.details);
       }
       setRefetch(!refetch);
     },
@@ -27,7 +27,7 @@ export default function List() {
   });
 
   const updateApi = useMutation(updateTodo, {
-    onSuccess: (response) => {
+    onSuccess: (response: any) => {
       if (response?.response?.data?.details) {
         alert(response.response.data.details);
       }
@@ -38,7 +38,7 @@ export default function List() {
   });
 
   const deleteApi = useMutation(deleteTodo, {
-    onSuccess: (response) => {
+    onSuccess: (response: any) => {
       if (response?.response?.data?.details) {
         alert(response.response.data.details);
       }
@@ -46,14 +46,14 @@ export default function List() {
     },
     onError: (err) => console.log(err),
   });
-  const onCreate = ({ title, content }) => {
+  const onCreate = ({ title, content }: any) => {
     const params = {
       title,
       content,
     };
     createApi.mutate(params);
   };
-  const onUpdate = ({ id, title, content }) => {
+  const onUpdate = ({ id, title, content }: any) => {
     console.log(id, title, content);
     const params = {
       id,
@@ -63,7 +63,7 @@ export default function List() {
     updateApi.mutate(params);
   };
 
-  const onDelete = ({ id }) => {
+  const onDelete = ({ id }: any) => {
     const params = {
       id,
     };

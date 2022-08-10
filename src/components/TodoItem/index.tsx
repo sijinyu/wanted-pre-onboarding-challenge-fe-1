@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button, Input, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
+interface ITodoItem {
+  item?: any;
+  onUpdate?: any;
+  onDelete?: any;
+  onCreate?: any;
+}
+const TodoItem = ({ item, onUpdate, onDelete, onCreate }: ITodoItem) => {
   const navigate = useNavigate();
 
   const [modify, setModify] = useState(false);
@@ -11,7 +16,7 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
     title: item.title,
     content: item.content,
   });
-  const handeModify = (modify) => {
+  const handeModify = (modify: boolean) => {
     if (modify) {
       onUpdate({ id: item.id, title, content });
       setModify(!modify);
@@ -20,14 +25,14 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
     }
   };
 
-  const onChange = (e) => {
+  const onChange = (e: { target: { value: any; name: any } }) => {
     const { value, name } = e.target;
     setInput({
       ...input,
       [name]: value,
     });
   };
-  const moveDetail = (e) => {
+  const moveDetail = (e: any) => {
     navigate(`/detail/${item.id}`, { state: item });
   };
   const { title, content } = input;
@@ -38,7 +43,7 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }) => {
         flexDirection="column"
         component={"a"}
         sx={{ cursor: "pointer" }}
-        onClick={(e) => moveDetail(e)}
+        onClick={(e: any) => moveDetail(e)}
       >
         <span>제목</span>
         <Input

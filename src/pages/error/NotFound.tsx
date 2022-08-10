@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -11,7 +10,7 @@ export default function NotFount() {
       <Box mt={10}>
         <Typography variant="h3">페이지 찾을 수 없음</Typography>
       </Box>
-      <Button variant="primary" type="button" href="/" disableTouchRipple>
+      <Button variant="contained" type="button" href="/" disableTouchRipple>
         메인으로 가기
       </Button>
     </Container>

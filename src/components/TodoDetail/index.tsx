@@ -2,14 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Input, Link, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const TodoItem = ({ type, item, onUpdate, onDelete, onCreate }) => {
+interface ITodoItem {
+  type?: any;
+  item?: any;
+  onUpdate?: any;
+  onDelete?: any;
+  onCreate?: any;
+}
+export default React.memo(function TodoItem({
+  type,
+  item,
+  onUpdate,
+  onDelete,
+  onCreate,
+}: ITodoItem) {
   const [modify, setModify] = useState(false);
 
   const [input, setInput] = useState({
     title: item.title,
     content: item.content,
   });
-  const handeModify = (modify) => {
+  const handeModify = (modify: boolean) => {
     console.log(title, content);
     if (modify) {
       onUpdate({ id: item.id, title, content });
@@ -19,7 +32,7 @@ const TodoItem = ({ type, item, onUpdate, onDelete, onCreate }) => {
     }
   };
 
-  const onChange = (e) => {
+  const onChange = (e: { target: { value: any; name: any } }) => {
     const { value, name } = e.target;
     setInput({
       ...input,
@@ -30,7 +43,7 @@ const TodoItem = ({ type, item, onUpdate, onDelete, onCreate }) => {
   const { title, content } = input;
   return (
     <Box>
-      <Box component={"a"} onClick={() => navigate}>
+      <Box component={"a"}>
         <Stack spacing={1} mb={3}>
           <span>제목</span>
           <Input
@@ -41,8 +54,7 @@ const TodoItem = ({ type, item, onUpdate, onDelete, onCreate }) => {
           ></Input>
         </Stack>
       </Box>
-      {/* <<div>제목 : {title}</div>> */}
-      {/* <Stack direction="row">
+      <Stack direction="row">
         <Input
           disabled={!modify}
           fullWidth
@@ -60,9 +72,7 @@ const TodoItem = ({ type, item, onUpdate, onDelete, onCreate }) => {
             <Button onClick={() => onDelete({ id: item.id })}>삭제</Button>
           </>
         )}
-      </Stack> */}
+      </Stack>
     </Box>
   );
-};
-
-export default React.memo(TodoItem);
+});

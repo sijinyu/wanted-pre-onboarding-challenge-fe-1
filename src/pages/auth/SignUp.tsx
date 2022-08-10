@@ -28,7 +28,7 @@ export default function SignUp() {
       alert(message);
       navigate("/auth/signIn", { replace: true });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       const {
         data: { details },
       } = error.response;
@@ -47,17 +47,17 @@ export default function SignUp() {
     mutate(params);
   };
 
-  const onChange = (e) => {
+  const onChange = (e: { target: { value: any; name: any } }) => {
     const { value, name } = e.target;
     setInput({
       ...input,
       [name]: value,
     });
   };
-  const emailValidate = (email) => {
+  const emailValidate = (email: string | string[]) => {
     return email.includes("@") && email.includes(".");
   };
-  const passwordValidate = (password) => {
+  const passwordValidate = (password: string | any[]) => {
     return password.length >= 8;
   };
 
@@ -118,7 +118,7 @@ export default function SignUp() {
           >
             회원 가입
           </Button>
-          <Typography variant="span">{message}</Typography>
+          <Typography>{message}</Typography>
         </Box>
       </Box>
     </Container>

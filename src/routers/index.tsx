@@ -1,13 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import LayoutRoute from "./LayoutRoute";
-import { Auth } from "@pages/auth";
-import { Todo } from "@pages/todo";
-import NotFount from "@pages/error/NotFound";
+import { Auth } from "@/pages/auth";
+import { Todo } from "@/pages/todo";
+import { Error } from "@/pages/error";
 
 export default function Router() {
   const { List, Detail } = Todo;
   const { SignIn, SignUp } = Auth;
+  const { NotFound } = Error;
+
   return (
     <>
       <Routes>
@@ -19,7 +21,7 @@ export default function Router() {
           <Route path="/auth/signIn" element={<SignIn />} />
           <Route path="/auth/signUp" element={<SignUp />} />
         </Route>
-        <Route path="*" element={<NotFount />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

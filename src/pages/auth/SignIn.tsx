@@ -9,36 +9,33 @@ import { Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { postSignIn } from "./crud";
+import { useInputMultiple } from "@/hooks";
 
 export default function SignIn() {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [disabled, setDisabled] = useState(true);
-
-  const [input, setInput] = useState({
+  const [{ email, password }, onChange] = useInputMultiple({
     email: "",
     password: "",
   });
-
   const { mutate } = useMutation(postSignIn, {
     onSuccess: (response) => {
       const {
         data: { message, token },
       } = response;
-      alert(message);
       localStorage.setItem("token", token);
       window.location.replace("/");
     },
-    onError: (error) => {
+    onError: (error: any) => {
       const {
         data: { details },
-      } = error.response;
+      } = error!.response;
       setMessage(details);
     },
   });
 
   const handleSubmit = () => {
-    const { email, password } = input;
     const params = {
       email,
       password,
@@ -46,25 +43,16 @@ export default function SignIn() {
 
     mutate(params);
   };
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setInput({
-      ...input,
-      [name]: value,
-    });
-  };
-  const emailValidate = (email) => {
+  const emailValidate = (email: string | string[]) => {
     return email.includes("@") && email.includes(".");
   };
-  const passwordValidate = (password) => {
+  const passwordValidate = (password: string | any[]) => {
     return password.length >= 8;
   };
 
   useEffect(() => {
-    setDisabled(
-      !(emailValidate(input.email) && passwordValidate(input.password))
-    );
-  }, [input]);
+    setDisabled(!(emailValidate(email) && passwordValidate(password)));
+  }, [email, password]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -79,7 +67,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           로그인
         </Typography>
-        <Box noValidate sx={{ mt: 1 }}>
+        <Box sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -113,13 +101,9 @@ export default function SignIn() {
             로그인
           </Button>
         </Box>
-        <Typography variant="span">{message}</Typography>
+        <Typography>{message}</Typography>
         <Stack width={"100%"} sx={{ mt: 1 }} alignItems="flex-end">
-          <Button
-            type="text"
-            variant="text"
-            onClick={() => navigate("/auth/signUp")}
-          >
+          <Button variant="contained" onClick={() => navigate("/auth/signUp")}>
             회원가입
           </Button>
         </Stack>

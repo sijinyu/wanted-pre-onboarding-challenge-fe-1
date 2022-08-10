@@ -1,6 +1,5 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/Layout/Header";
+import Header from "@/components/Layout/Header";
 
 const token = localStorage.getItem("token");
 function LayoutRoute() {

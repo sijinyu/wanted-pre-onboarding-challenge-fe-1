@@ -3,11 +3,17 @@ import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 
 import TodoItem from "../TodoItem";
 
-const TodoList = ({ todos, onCreate, onUpdate, onDelete }) => {
+interface TodoList {
+  todos?: any;
+  onCreate?: any;
+  onUpdate?: any;
+  onDelete?: any;
+}
+const TodoList = ({ todos, onCreate, onUpdate, onDelete }: TodoList) => {
   const [input, setInput] = useState({ title: "", content: "" });
   const { title, content } = input;
   const onChange = useCallback(
-    (e) => {
+    (e: { target: { value: any; name: any } }) => {
       const { value, name } = e.target;
 
       setInput({

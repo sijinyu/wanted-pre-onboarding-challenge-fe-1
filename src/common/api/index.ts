@@ -14,7 +14,7 @@ Api.interceptors.request.use(
     const originalRequest = config;
     try {
       const token = await localStorage.getItem("token");
-      originalRequest.headers.Authorization = `Bearer ${token}`;
+      originalRequest!.headers!.Authorization = `Bearer ${token}`;
     } catch (e) {
       console.log("API.interceptors.request.use", e);
     }
