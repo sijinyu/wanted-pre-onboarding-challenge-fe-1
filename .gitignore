@@ -11,6 +11,8 @@ db/db.json# See https://help.github.com/articles/ignoring-files/ for more about 
 # testing
 /coverage
 
+# tsc
+.tsconfig
 # production
 /build
 

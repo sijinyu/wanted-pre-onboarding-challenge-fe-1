@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ESNext", // 사용할 특정 ECMAScript 버전 설정
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "react-jsx", //JSX 코드 생성 설정
+    "allowJs": true, // js 파일 사용 허용하는 옵션, 모두 바뀌게 되면 지우자
+    "module": "ESNext",
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "forceConsistentCasingInFileNames": true, // 파일의 이름을 대소문자까지 정확하게 작성하도록 강제하는 설정
+    "skipLibCheck": true, //정의 파일의 타입 확인을 건너 뛸 지 여부 ,
+    "moduleResolution": "Node", //모듈 해석 방법 설정
+    "rootDir": "src", // 입력 파일의 루트 디렉토리(rootDir) 설정으로 --outDir로 결과 디렉토리 구조를 조작할 때 사용됩니다.
+    "outDir": "build/dist", //해당 디렉토리로 결과 구조를 보냅니다.
+    "baseUrl": ".", //상대경로의 모듈 이름을 처리할 기준 디렉토리
+    "noEmit": true, // 결과파일 내보낼지 유무
+    "paths": {
+      // 'baseUrl'를 기준으로 모듈 이름을 처리한 기준 디렉토리
+      "@/*": ["src/*"]
+    }
+  }
+}

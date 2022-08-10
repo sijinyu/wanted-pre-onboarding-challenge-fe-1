@@ -1,20 +1,19 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import SignIn from "../pages/auth/SignIn";
-import SignUp from "../pages/auth/SignUp";
-import NotFount from "../pages/error/NotFound";
-import { Todo } from "../pages/todo";
 import AuthLayout from "./AuthLayout";
 import LayoutRoute from "./LayoutRoute";
+import { Auth } from "@pages/auth";
+import { Todo } from "@pages/todo";
+import NotFount from "@pages/error/NotFound";
 
 export default function Router() {
   const { List, Detail } = Todo;
+  const { SignIn, SignUp } = Auth;
   return (
     <>
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<List />} />
-          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/todos/:id" element={<Detail />} />
         </Route>
         <Route element={<LayoutRoute />}>
           <Route path="/auth/signIn" element={<SignIn />} />
@@ -24,6 +23,4 @@ export default function Router() {
       </Routes>
     </>
   );
-  // logout Page
-  // <Router exact path="/" render={SignIn} />
 }

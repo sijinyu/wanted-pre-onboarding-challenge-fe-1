@@ -81,7 +81,7 @@ export default function List() {
       {isLoading && <SplashScreen />}
       {isSuccess && (
         <TodoList
-          todos={list}
+          todos={list?.reverse()}
           onCreate={onCreate}
           onUpdate={onUpdate}
           onDelete={onDelete}

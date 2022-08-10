@@ -1,6 +1,6 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Router from "./routers";
+import Router from "@/routers";
 
 function App() {
   const queryClient = new QueryClient({
