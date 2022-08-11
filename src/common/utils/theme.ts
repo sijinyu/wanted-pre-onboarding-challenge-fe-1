@@ -1,3 +1,21 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material';
 
-export const theme = createTheme();
+const theme = createTheme({
+	components: {
+		MuiCssBaseline: {
+			styleOverrides: {
+				'body > #root > div': {
+					height: '100vh',
+				},
+			},
+		},
+		MuiButton: {
+			styleOverrides: {
+				colorInherit: {
+					color: 'paleturquoise',
+				},
+			},
+		},
+	},
+});
+export default theme;

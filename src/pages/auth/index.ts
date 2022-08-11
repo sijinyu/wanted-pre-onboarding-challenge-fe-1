@@ -1,7 +1,7 @@
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 export const Auth = {
-  SignIn,
-  SignUp,
+	SignIn,
+	SignUp,
 };
