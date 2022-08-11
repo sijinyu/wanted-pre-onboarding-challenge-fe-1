@@ -1,57 +1,80 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-redeclare */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/require-default-props */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { Box, Button, Grid, Stack, TextField, Typography } from '@mui/material';
 
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Button, TextField, Typography } from '@mui/material';
+import { useQueryClient } from 'react-query';
+import { useTodoApi } from '@/controller/todo/useTodoApi';
 import TodoItem from '../TodoItem';
 import { useInputMultiple } from '@/hooks';
-import { useTodoDetailApi } from '@/controller/todo/useTodoDetailApi';
+import { Styles } from './styles';
+import {
+	TodoIdState,
+	TodoResponse,
+	TodoTitleContentIdState,
+	TodoTitleContentState,
+} from '@/repository/todo';
 
-interface TodoList {
-	todos?: any;
-	onCreate?: any;
-	onUpdate?: any;
-	onDelete?: any;
-	children?: React.ReactNode;
+interface TodoListProps {
+	todos?: TodoResponse[];
 }
-function TodoList({ todos, onCreate, onUpdate, onDelete, children }: TodoList) {
+
+function TodoList({ todos }: TodoListProps) {
+	const { create, update, remove } = useTodoApi();
+	const queryClient = useQueryClient();
+	const onCreate = ({ title, content }: TodoTitleContentState) =>
+		create.mutate({ title, content });
+	const onUpdate = ({ id, title, content }: TodoTitleContentIdState) =>
+		update.mutate({ id, title, content });
+	const onDelete = (id: TodoIdState) => {
+		remove.mutate(id);
+	};
+
+	useEffect(() => {
+		if (remove.isSuccess) {
+			queryClient.invalidateQueries(['todoList']);
+		}
+	}, [remove.isSuccess]);
 	const [{ title, content }, onChange] = useInputMultiple({
 		title: '',
 		content: '',
 	});
 	return (
-		<Box>
-			<Typography variant="h2" textAlign="center" mt={10}>
-				TodoList
-			</Typography>
-			<Stack spacing={2} mb={3}>
+		<Styles.Warp>
+			<Styles.Header>
+				<Typography variant="h4" textAlign="center" mb={2}>
+					오늘은 어떤 일을 할까요?
+				</Typography>
+			</Styles.Header>
+			<Styles.ItemAddContainer>
 				<TextField fullWidth label="제목" name="title" onChange={onChange} />
-				<TextField fullWidth label="내용" name="content" onChange={onChange} />
+				<TextField
+					multiline
+					maxRows={4}
+					label="내용"
+					placeholder="조금 더 자세히 계획 해봐요!"
+					name="content"
+					onChange={onChange}
+				/>
 				<Button
 					variant="contained"
 					onClick={() => onCreate({ title, content })}
 				>
-					추가
+					할 일을 추가 해보아요
 				</Button>
-			</Stack>
-			<Grid container>
-				<Grid item xs={12}>
-					{Array.isArray(todos) &&
-						todos?.map(todo => (
-							<TodoItem
-								key={todo.id}
-								item={todo}
-								onUpdate={onUpdate}
-								onDelete={onDelete}
-							/>
-						))}
-				</Grid>
-			</Grid>
-			<Outlet />
-		</Box>
+			</Styles.ItemAddContainer>
+			<Styles.ItemContainer gap={2} maxHeight="500px" overflow="scroll">
+				{Array.isArray(todos) &&
+					todos?.map(todo => (
+						<TodoItem
+							key={todo.id}
+							item={todo}
+							onUpdate={onUpdate}
+							onDelete={onDelete}
+						/>
+					))}
+			</Styles.ItemContainer>
+		</Styles.Warp>
 	);
 }
 

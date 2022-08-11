@@ -5,47 +5,46 @@ import todoRepository, {
 	TodoTitleContentIdState,
 	TodoTitleContentState,
 } from '@/repository/todo';
+import { handleInvalidateQueries } from '@/common/utils/reactQuery';
+
+const todoListKey = 'todoList';
 
 export const useTodoApi = () => ({
 	create: useMutation<{ data: TodoResponse }, Error, TodoTitleContentState>(
 		todoRepository.create,
 		{
-			onSuccess: response => {
-				console.log(response, '--');
+			onSuccess: () => {
+				handleInvalidateQueries(todoListKey);
 			},
-			onError: (error: Error) => {
-				console.log(error, '--');
-			},
+			onError: (error: Error) => console.log(error),
 		},
 	),
 	update: useMutation<{ data: TodoResponse }, Error, TodoTitleContentIdState>(
-		todoRepository.create,
+		todoRepository.update,
 		{
 			onSuccess: response => {
-				console.log(response, '--');
+				console.log('asdad', response);
+				handleInvalidateQueries(todoListKey);
 			},
-			onError: (error: Error) => {
-				console.log(error, '--');
-			},
+			onError: (error: Error) => console.log(error),
 		},
 	),
 	remove: useMutation<{ data: null }, Error, TodoIdState>(
 		todoRepository.delete,
 		{
-			onSuccess: () => {},
-			onError: (error: Error) => {
-				console.log(error, '--');
+			onSuccess: () => {
+				handleInvalidateQueries(todoListKey);
 			},
 		},
 	),
 	getAll: useQuery<{ data: TodoResponse[] }, Error>(
-		'todoList',
+		todoListKey,
 		todoRepository.getAll,
 		{
 			onSuccess: response => {
-				console.log(response, '--');
+				console.log(response);
 			},
-			onError: (error: Error) => console.log(error, '--'),
+			onError: (error: Error) => console.log(error),
 		},
 	),
 });

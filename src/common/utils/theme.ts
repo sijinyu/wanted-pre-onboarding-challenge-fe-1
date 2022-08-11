@@ -7,12 +7,8 @@ const theme = createTheme({
 				'body > #root > div': {
 					height: '100vh',
 				},
-			},
-		},
-		MuiButton: {
-			styleOverrides: {
-				colorInherit: {
-					color: 'paleturquoise',
+				body: {
+					background: '#98e29b',
 				},
 			},
 		},

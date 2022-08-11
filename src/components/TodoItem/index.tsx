@@ -1,79 +1,86 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable react/require-default-props */
 import React, { useState } from 'react';
-import { Box, Button, Input, Stack } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { ButtonBase, Grid, Typography } from '@mui/material';
+import { Outlet, useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CancleIcon from '@mui/icons-material/Cancel';
+import CheckIcon from '@mui/icons-material/Check';
+import { Styles } from './styles';
+import {
+	TodoTitleContentIdState,
+	TodoTitleContentState,
+} from '@/repository/todo';
+import { useInputMultiple } from '@/hooks';
 
 interface ITodoItem {
-	item?: any;
-	onUpdate?: any;
-	onDelete?: any;
-	onCreate?: any;
+	item: TodoTitleContentIdState;
+	onUpdate: any;
+	onDelete: any;
 }
-function TodoItem({ item, onUpdate, onDelete, onCreate }: ITodoItem) {
+function TodoItem({ item, onUpdate, onDelete }: ITodoItem) {
 	const navigate = useNavigate();
-
-	const [modify, setModify] = useState(false);
-
-	const [input, setInput] = useState({
+	const [isNotModify, setIsNotModify] = useState(true);
+	const [prevState, setPrevState] = useState<TodoTitleContentState>();
+	const [{ title, content }, onChange, reset] = useInputMultiple({
 		title: item.title,
 		content: item.content,
 	});
-	const handeModify = (modify: boolean) => {
-		if (modify) {
-			onUpdate({ id: item.id, title, content });
-			setModify(!modify);
-		} else {
-			setModify(!modify);
-		}
+	console.log(title, '--');
+	const handeModify = () => {
+		setIsNotModify(false);
+		setPrevState({ title, content });
 	};
-
-	const onChange = (e: { target: { value: any; name: any } }) => {
-		const { value, name } = e.target;
-		setInput({
-			...input,
-			[name]: value,
-		});
+	const handleModifyCancle = () => {
+		setIsNotModify(true);
+		reset(prevState);
 	};
-	const moveDetail = (e: any) => {
-		navigate(`/${item.id}`, { state: item });
+	const handleModfyComplete = () => {
+		setIsNotModify(true);
+		onUpdate({ title, content });
 	};
-	const { title, content } = input;
+	const moveDetail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		navigate(`/${item.id}`, { state: { id: item.id } });
+	};
 	return (
-		<Box>
-			<Box
-				display="flex"
-				flexDirection="column"
-				sx={{ cursor: 'pointer' }}
-				onClick={(e: any) => moveDetail(e)}
+		<Styles.Container>
+			<Grid
+				container
+				justifyContent="space-between"
+				onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+					moveDetail(e)
+				}
 			>
-				<span>제목</span>
-				<Input
-					disabled={!modify}
-					name="title"
-					value={title}
-					onClick={e => e.stopPropagation()}
-					onChange={onChange}
-				/>
-				<span>내용</span>
-				<Input
-					disabled={!modify}
-					value={content}
-					name="content"
-					onClick={e => e.stopPropagation()}
-					onChange={onChange}
-				/>
-			</Box>
-			<Stack direction="row" justifyContent="flex-end">
-				<Button onClick={() => handeModify(modify)}>
-					{modify ? '완료' : '수정'}
-				</Button>
-				<Button onClick={() => onDelete({ id: item.id })}>삭제</Button>
-			</Stack>
-		</Box>
+				<Grid item>
+					<Styles.LeftItem>
+						<Typography>{title}</Typography>
+					</Styles.LeftItem>
+				</Grid>
+				<Grid item>
+					<Styles.RightItem>
+						{isNotModify ? (
+							<ButtonBase onClick={() => handeModify()} disableRipple>
+								<EditIcon color="action" />
+							</ButtonBase>
+						) : (
+							<>
+								<ButtonBase onClick={() => handleModifyCancle()} disableRipple>
+									<CancleIcon color="action" />
+								</ButtonBase>
+								<ButtonBase onClick={() => handleModfyComplete()} disableRipple>
+									<CheckIcon color="action" />
+								</ButtonBase>
+							</>
+						)}
+						<ButtonBase onClick={() => onDelete({ id: item.id })} disableRipple>
+							<DeleteIcon color="action" />
+						</ButtonBase>
+					</Styles.RightItem>
+				</Grid>
+			</Grid>
+			<Outlet
+				context={{ id: item.id, content, title, isNotModify, onChange }}
+			/>
+		</Styles.Container>
 	);
 }
 

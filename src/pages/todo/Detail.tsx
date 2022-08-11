@@ -1,25 +1,52 @@
 import React from 'react';
-import { Typography, Container } from '@mui/material';
-// import { useLocation } from 'react-router-dom';
+import { Typography, Container, Input } from '@mui/material';
+import { useLocation, useOutletContext } from 'react-router-dom';
+import { TodoIdState, TodoTitleContentIdState } from '@/repository/todo';
 
-function TodoDetail() {
-	// const state = useLocation();
+interface TodoUpdateState {
+	id: string;
+	content: string;
+	title: string;
+	isNotModify: boolean;
+	onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+}
+function Detail() {
+	const { id, content, title, isNotModify, onChange } =
+		useOutletContext<TodoUpdateState>();
+	const location = useLocation();
+	const state = location.state as TodoIdState;
+	if (state.id !== id) return null;
 	return (
-		<Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-			<Typography variant="h4" component="h1" gutterBottom>
-				제목
-			</Typography>
-			<Typography variant="h5" component="h2" gutterBottom>
-				{/* {state?.title} */}
-			</Typography>
-			<Typography variant="h4" component="h1" gutterBottom>
-				내용
-			</Typography>
-			<Typography variant="h5" component="h2" gutterBottom>
-				{/* {state?.content} */}
-			</Typography>
+		<Container
+			sx={{
+				width: '100%',
+				mt: 2,
+				p: '20px',
+				border: '1px solid #dbdbdb',
+				borderRadius: '20px',
+			}}
+		>
+			<span>제목</span>
+			<Input
+				value={title}
+				fullWidth
+				onChange={onChange}
+				name="title"
+				readOnly={isNotModify}
+				disableUnderline
+			/>
+			<span>내용</span>
+			<Input
+				multiline
+				value={content}
+				name="content"
+				fullWidth
+				onChange={onChange}
+				readOnly={isNotModify}
+				disableUnderline
+			/>
 		</Container>
 	);
 }
 
-export default TodoDetail;
+export default Detail;
