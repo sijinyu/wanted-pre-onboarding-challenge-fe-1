@@ -1,59 +1,24 @@
-import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Stack } from "@mui/material";
+import {
+  Container,
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Stack,
+  Alert,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-import { postSignIn } from "./crud";
 import { useInputMultiple } from "@/hooks";
+import { useSignIn } from "@/controller/useSignIn";
 
 export default function SignIn() {
   const navigate = useNavigate();
-  const [message, setMessage] = useState("");
-  const [disabled, setDisabled] = useState(true);
   const [{ email, password }, onChange] = useInputMultiple({
     email: "",
     password: "",
   });
-  const { mutate } = useMutation(postSignIn, {
-    onSuccess: (response) => {
-      const {
-        data: { message, token },
-      } = response;
-      localStorage.setItem("token", token);
-      window.location.replace("/");
-    },
-    onError: (error: any) => {
-      const {
-        data: { details },
-      } = error!.response;
-      setMessage(details);
-    },
-  });
-
-  const handleSubmit = () => {
-    const params = {
-      email,
-      password,
-    };
-
-    mutate(params);
-  };
-  const emailValidate = (email: string | string[]) => {
-    return email.includes("@") && email.includes(".");
-  };
-  const passwordValidate = (password: string | any[]) => {
-    return password.length >= 8;
-  };
-
-  useEffect(() => {
-    setDisabled(!(emailValidate(email) && passwordValidate(password)));
-  }, [email, password]);
-
+  const { signIn, message, isValidate } = useSignIn({ email, password });
+  const handleSubmit = () => signIn.mutate({ email, password });
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -62,12 +27,13 @@ export default function SignIn() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          marginBottom: 2,
         }}
       >
         <Typography component="h1" variant="h5">
           로그인
         </Typography>
-        <Box sx={{ mt: 1 }}>
+        <Box>
           <TextField
             margin="normal"
             required
@@ -88,10 +54,9 @@ export default function SignIn() {
             type="password"
             id="password"
             onChange={onChange}
-            autoComplete="current-password"
           />
           <Button
-            disabled={disabled}
+            disabled={!isValidate}
             type="submit"
             fullWidth
             onClick={handleSubmit}
@@ -101,7 +66,11 @@ export default function SignIn() {
             로그인
           </Button>
         </Box>
-        <Typography>{message}</Typography>
+        {message && (
+          <Alert sx={{ width: "100%", mt: 1 }} severity="error">
+            {message}
+          </Alert>
+        )}
         <Stack width={"100%"} sx={{ mt: 1 }} alignItems="flex-end">
           <Button variant="contained" onClick={() => navigate("/auth/signUp")}>
             회원가입

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, Input, Stack } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 interface ITodoItem {
   item?: any;
   onUpdate?: any;
@@ -33,7 +33,7 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }: ITodoItem) => {
     });
   };
   const moveDetail = (e: any) => {
-    navigate(`/detail/${item.id}`, { state: item });
+    navigate(`/${item.id}`, { state: item });
   };
   const { title, content } = input;
   return (
@@ -41,7 +41,6 @@ const TodoItem = ({ item, onUpdate, onDelete, onCreate }: ITodoItem) => {
       <Box
         display="flex"
         flexDirection="column"
-        component={"a"}
         sx={{ cursor: "pointer" }}
         onClick={(e: any) => moveDetail(e)}
       >

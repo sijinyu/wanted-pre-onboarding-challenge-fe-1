@@ -1,8 +1,4 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Button } from "@mui/material";
+import { Box, Typography, Container, Button } from "@mui/material";
 
 export default function NotFount() {
   return (

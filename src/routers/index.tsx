@@ -14,8 +14,9 @@ export default function Router() {
     <>
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route path="/" element={<List />} />
-          <Route path="/todos/:id" element={<Detail />} />
+          <Route path="/" element={<List />}>
+            <Route path="/:id" element={<Detail />} />
+          </Route>
         </Route>
         <Route element={<LayoutRoute />}>
           <Route path="/auth/signIn" element={<SignIn />} />

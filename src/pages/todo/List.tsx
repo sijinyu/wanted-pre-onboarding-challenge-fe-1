@@ -4,7 +4,9 @@ import TodoList from "../../components/TodoList";
 import { useMutation, useQuery } from "react-query";
 import SplashScreen from "../../components/Layout/SplashScreen";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "./crud";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Route, useNavigate } from "react-router-dom";
+import Detail from "./Detail";
+import { Box } from "@mui/material";
 
 export default function List() {
   const navigate = useNavigate();
@@ -77,16 +79,18 @@ export default function List() {
   const list = data?.data?.data;
   return (
     <Container component="main" maxWidth="xs">
-      {isError && <p>투드리스트를 불러오는데 실패했습니다.</p>}
-      {isLoading && <SplashScreen />}
-      {isSuccess && (
-        <TodoList
-          todos={list?.reverse()}
-          onCreate={onCreate}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
-      )}
+      <Box display={"flex"}>
+        {isError && <p>투드리스트를 불러오는데 실패했습니다.</p>}
+        {isLoading && <SplashScreen />}
+        {isSuccess && (
+          <TodoList
+            todos={list}
+            onCreate={onCreate}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          ></TodoList>
+        )}
+      </Box>
     </Container>
   );
 }

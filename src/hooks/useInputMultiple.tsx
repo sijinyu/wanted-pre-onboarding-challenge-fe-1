@@ -9,12 +9,16 @@ export const useInputMultiple = (initialForm: IuseInputMultiple): any => {
   //
   const [form, setForm] = useState(initialForm);
 
-  const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { name, value },
-    } = event;
-    setForm({ ...form, [name]: value });
-  }, []);
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const {
+        target: { name, value },
+      } = event;
+      console.log(name, value, "--");
+      setForm({ ...form, [name]: value });
+    },
+    [form]
+  );
   const reset = useCallback(() => setForm(initialForm), [initialForm]);
   return [form, onChange, reset];
 };

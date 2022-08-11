@@ -1,29 +1,28 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, ReactNode } from "react";
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 
 import TodoItem from "../TodoItem";
+import { useInputMultiple } from "@/hooks";
+import { Outlet } from "react-router-dom";
 
 interface TodoList {
   todos?: any;
   onCreate?: any;
   onUpdate?: any;
   onDelete?: any;
+  children?: React.ReactNode;
 }
-const TodoList = ({ todos, onCreate, onUpdate, onDelete }: TodoList) => {
-  const [input, setInput] = useState({ title: "", content: "" });
-  const { title, content } = input;
-  const onChange = useCallback(
-    (e: { target: { value: any; name: any } }) => {
-      const { value, name } = e.target;
-
-      setInput({
-        ...input,
-        [name]: value,
-      });
-    },
-    [input]
-  );
-  console.log("--");
+const TodoList = ({
+  todos,
+  onCreate,
+  onUpdate,
+  onDelete,
+  children,
+}: TodoList) => {
+  const [{ title, content }, onChange] = useInputMultiple({
+    title: "",
+    content: "",
+  });
   return (
     <Box>
       <Typography variant="h2" textAlign="center" mt={10}>
@@ -65,6 +64,7 @@ const TodoList = ({ todos, onCreate, onUpdate, onDelete }: TodoList) => {
             })}
         </Grid>
       </Grid>
+      <Outlet />
     </Box>
   );
 };
