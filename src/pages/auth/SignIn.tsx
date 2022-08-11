@@ -20,6 +20,7 @@ export default function SignIn() {
 	});
 	const { signIn, message, isValidate } = useSignIn({ email, password });
 	const handleSubmit = () => signIn.mutate({ email, password });
+
 	return (
 		<Container component="main" maxWidth="xs">
 			<Box
@@ -27,7 +28,10 @@ export default function SignIn() {
 					marginTop: 8,
 					display: 'flex',
 					flexDirection: 'column',
+					borderRadius: '20px',
 					alignItems: 'center',
+					background: 'white',
+					padding: '20px',
 					marginBottom: 2,
 				}}
 			>

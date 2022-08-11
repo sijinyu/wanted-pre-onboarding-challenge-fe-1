@@ -25,6 +25,9 @@ export default function SignUp() {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
+					padding: '20px',
+					borderRadius: '20px',
+					background: 'white',
 				}}
 			>
 				<Typography component="h1" variant="h5">
