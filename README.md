@@ -11,6 +11,11 @@
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
 
+## 1일차 과제
+
+https://sudden-author-9b0.notion.site/1-90942c7281d14c58a8fcb49fadc875d6
+
+
 ## Assignment 1 - Login / SignUp
 
 - /auth 경로에 로그인 / 회원가입 기능을 개발합니다
