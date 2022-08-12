@@ -10,4 +10,4 @@ export const queryClient = new QueryClient({
 });
 
 export const handleInvalidateQueries = (key: string) =>
-	queryClient.invalidateQueries(['todoList']);
+	queryClient.invalidateQueries([key]);
