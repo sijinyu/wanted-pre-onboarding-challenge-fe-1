@@ -29,6 +29,8 @@ function Detail() {
 			<span>제목</span>
 			<Input
 				value={title}
+				multiline
+				maxRows={4}
 				fullWidth
 				onChange={onChange}
 				name="title"

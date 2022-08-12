@@ -23,7 +23,7 @@ export const useTodoApi = () => ({
 		todoRepository.update,
 		{
 			onSuccess: response => {
-				console.log('asdad', response);
+				console.log('update Todo', response);
 				handleInvalidateQueries(todoListKey);
 			},
 			onError: (error: Error) => console.log(error),

@@ -2,20 +2,20 @@ import React, { useEffect } from 'react';
 import { Container } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Header from '@/components/Layout/Header';
-import { useStorageCheck } from '@/hooks';
+import { localStorage } from '@/common/utils';
 
 function AuthLayout() {
-	const { items } = useStorageCheck({ key: 'token' });
 	const navigate = useNavigate();
+	const auth: any = localStorage.getLocalStorage('token');
 	useEffect(() => {
-		if (!items) {
-			alert('안되여');
+		if (!auth?.token) {
+			alert('토큰이 유효하지 않습니다.');
 			navigate('/auth/signIn', { replace: true });
 		}
-	}, [items, navigate]);
+	}, [auth, navigate]);
 	return (
 		<Container>
-			<Header token={items} />
+			<Header token={auth} />
 			<Outlet />
 		</Container>
 	);

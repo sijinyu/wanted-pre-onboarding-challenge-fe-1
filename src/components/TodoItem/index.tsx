@@ -25,7 +25,6 @@ function TodoItem({ item, onUpdate, onDelete }: ITodoItem) {
 		title: item.title,
 		content: item.content,
 	});
-	console.log(title, '--');
 	const handeModify = () => {
 		setIsNotModify(false);
 		setPrevState({ title, content });
@@ -36,7 +35,7 @@ function TodoItem({ item, onUpdate, onDelete }: ITodoItem) {
 	};
 	const handleModfyComplete = () => {
 		setIsNotModify(true);
-		onUpdate({ title, content });
+		onUpdate({ id: item.id, title, content });
 	};
 	const moveDetail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		navigate(`/${item.id}`, { state: { id: item.id } });

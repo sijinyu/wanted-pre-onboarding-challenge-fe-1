@@ -30,7 +30,12 @@ Api.interceptors.response.use(
 	response => response,
 	async error => {
 		try {
+			console.log(error, '--');
 			const { response } = error;
+			if (response?.status === 400) {
+				alert('토큰이 유효하지 않습니다. 재 로그인 해주세요.');
+				window.location.href = `/auth/signIn`;
+			}
 			if (response?.status === 401) {
 				alert('토큰이 만료되었습니다. 재 로그인 해주세요.');
 				window.location.href = `/auth/signIn`;

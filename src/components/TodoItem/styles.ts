@@ -8,6 +8,7 @@ const Container = styled(Box)(({ theme }) => ({
 }));
 const LeftItem = styled(Box)(({ theme }) => ({
 	width: '100%',
+	wordBreak: 'break-all',
 	input: {
 		width: '100%',
 	},

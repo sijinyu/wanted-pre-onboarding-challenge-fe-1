@@ -3,10 +3,7 @@ import { Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { localStorage } from '@/common/utils';
 
-interface IHeader {
-	token: string | undefined;
-}
-function Header({ token }: IHeader) {
+function Header({ token }: any) {
 	const navigate = useNavigate();
 	const logOut = () => {
 		localStorage.removeLocalStorage('token');
