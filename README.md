@@ -13,7 +13,7 @@
 
 ## 1일차 과제
 
-https://sudden-author-9b0.notion.site/1-90942c7281d14c58a8fcb49fadc875d6
+ 🌝 https://sudden-author-9b0.notion.site/1-90942c7281d14c58a8fcb49fadc875d6
 
 
 ## Assignment 1 - Login / SignUp
