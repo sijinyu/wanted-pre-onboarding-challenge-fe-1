@@ -18,7 +18,7 @@ Api.interceptors.request.use(
 			if (token) {
 				originalRequest.headers.Authorization = `Bearer ${token}`;
 			}
-		} catch (e: any) {
+		} catch (e) {
 			console.log('API.interceptors.reqest.use', e);
 		}
 		return config;
@@ -30,16 +30,14 @@ Api.interceptors.response.use(
 	response => response,
 	async error => {
 		try {
-			console.log(error, '--');
-			const { response } = error;
-			if (response?.status === 400) {
+			const {
+				response: { status },
+			} = error;
+			const tokenExpiration = status === 400 || status === 401;
+			if (tokenExpiration) {
 				alert('토큰이 유효하지 않습니다. 재 로그인 해주세요.');
-				window.location.href = `/auth/signIn`;
-			}
-			if (response?.status === 401) {
-				alert('토큰이 만료되었습니다. 재 로그인 해주세요.');
-				window.location.href = `/auth/signIn`;
 				localStorage.removeLocalStorage('token');
+				window.location.href = `/auth/signIn`;
 			}
 		} catch (e) {
 			console.log('API.interceptors.response.use', e);
