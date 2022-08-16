@@ -1,12 +1,16 @@
 import { useState, useCallback, ChangeEvent } from 'react';
 
-interface IuseInputMultiple {
-	[key: string]: string | number;
+interface IuseInputMultiple<T> {
+	[key: string]: T;
 }
 
-const useInputMultiple = (initialForm: IuseInputMultiple): any => {
-	// 리턴 타입을 어떻게 해야하는지 모르겠다.. 일단 any  굉장히 키키킹받는다
-	//
+const useInputMultiple = (
+	initialForm: IuseInputMultiple<any>,
+): [
+	IuseInputMultiple<any>,
+	(event: ChangeEvent<HTMLInputElement>) => void,
+	() => void,
+] => {
 	const [form, setForm] = useState(initialForm);
 
 	const onChange = useCallback(

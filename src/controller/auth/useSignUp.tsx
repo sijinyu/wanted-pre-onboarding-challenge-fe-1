@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
-import authRepository, { AuthResponse } from '@/repository/auth';
-import { IUserState } from '@/pages/auth/types';
+import authRepository, { AuthResponse, UserState } from '@/repository/auth';
 import { auth } from '@/common/utils';
 
 const { emailValidate, passwordValidate } = auth;
 
-export const useSignUp = ({ email, password }: IUserState) => {
+export const useSignUp = ({ email, password }: UserState) => {
 	const [isValidate, setIsValidate] = useState(true);
 	const [message, setMessage] = useState('');
 
@@ -20,19 +19,16 @@ export const useSignUp = ({ email, password }: IUserState) => {
 	}, [email, password]);
 
 	return {
-		signUp: useMutation<AuthResponse, Error, IUserState>(
-			authRepository.signUp,
-			{
-				onSuccess: (response: AuthResponse) => {
-					navigate('/auth/signIn', { replace: true });
-				},
-				onError: error => {
-					if (error instanceof AxiosError) {
-						setMessage(error.response?.data.details || error.message);
-					}
-				},
+		signUp: useMutation<AuthResponse, Error, UserState>(authRepository.signUp, {
+			onSuccess: (response: AuthResponse) => {
+				navigate('/auth/signIn', { replace: true });
 			},
-		),
+			onError: error => {
+				if (error instanceof AxiosError) {
+					setMessage(error.response?.data.details || error.message);
+				}
+			},
+		}),
 		message,
 		isValidate,
 	};

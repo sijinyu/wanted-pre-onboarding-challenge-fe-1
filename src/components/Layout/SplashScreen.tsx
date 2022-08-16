@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
+import { CircleRounded } from '@mui/icons-material';
 
 const StyleSplash = styled(Box)(({ theme, ...props }) => ({
 	position: 'absolute',
@@ -12,5 +13,9 @@ const StyleSplash = styled(Box)(({ theme, ...props }) => ({
 }));
 
 export default function SplashScreen() {
-	return <StyleSplash>로딩...</StyleSplash>;
+	return (
+		<StyleSplash>
+			<CircleRounded />
+		</StyleSplash>
+	);
 }

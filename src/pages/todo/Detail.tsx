@@ -1,7 +1,7 @@
 import React from 'react';
-import { Typography, Container, Input } from '@mui/material';
+import { Container, Input } from '@mui/material';
 import { useLocation, useOutletContext } from 'react-router-dom';
-import { TodoIdState, TodoTitleContentIdState } from '@/repository/todo';
+import { TodoIdState } from '@/repository/todo';
 
 interface TodoUpdateState {
 	id: string;

@@ -2,21 +2,19 @@ import Api from '@/common/api';
 
 const todos = `todos`;
 
-export interface TodoTitleContentState {
-	title: string;
-	content: string;
+type StringOrNumber = string | number;
+interface TodoBaseState {
+	title: StringOrNumber;
+	content: StringOrNumber;
 }
-export interface TodoTitleContentIdState {
+export type TodoTitleContentState = TodoBaseState;
+export interface TodoTitleContentIdState extends TodoBaseState {
 	id: string;
-	title: string;
-	content: string;
 }
 export interface TodoIdState {
 	id: string;
 }
-export interface TodoResponse {
-	title: string;
-	content: string;
+export interface TodoResponse extends TodoBaseState {
 	id: string;
 	createAt: string;
 	updateAt: string;

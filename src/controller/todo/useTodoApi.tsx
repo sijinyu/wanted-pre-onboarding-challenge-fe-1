@@ -16,17 +16,14 @@ export const useTodoApi = () => ({
 			onSuccess: () => {
 				handleInvalidateQueries(todoListKey);
 			},
-			onError: (error: Error) => console.log(error),
 		},
 	),
 	update: useMutation<{ data: TodoResponse }, Error, TodoTitleContentIdState>(
 		todoRepository.update,
 		{
 			onSuccess: response => {
-				console.log('update Todo', response);
 				handleInvalidateQueries(todoListKey);
 			},
-			onError: (error: Error) => console.log(error),
 		},
 	),
 	remove: useMutation<{ data: null }, Error, TodoIdState>(
@@ -40,11 +37,5 @@ export const useTodoApi = () => ({
 	getAll: useQuery<{ data: TodoResponse[] }, Error>(
 		todoListKey,
 		todoRepository.getAll,
-		{
-			onSuccess: response => {
-				console.log(response);
-			},
-			onError: (error: Error) => console.log(error),
-		},
 	),
 });

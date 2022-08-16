@@ -1,40 +1,25 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/require-default-props */
 
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
-import { useQueryClient } from 'react-query';
+import { TodoResponse, TodoTitleContentState } from '@/repository/todo';
 import { useTodoApi } from '@/controller/todo/useTodoApi';
-import TodoItem from '../TodoItem';
 import { useInputMultiple } from '@/hooks';
 import { Styles } from './styles';
-import {
-	TodoIdState,
-	TodoResponse,
-	TodoTitleContentIdState,
-	TodoTitleContentState,
-} from '@/repository/todo';
 
-interface TodoListProps {
+import SplashScreen from '@/components/Layout/SplashScreen';
+
+interface Props {
 	todos?: TodoResponse[];
 }
 
-function TodoList({ todos }: TodoListProps) {
-	const { create, update, remove } = useTodoApi();
-	const queryClient = useQueryClient();
+const TodoItem = lazy(() => import('../TodoItem'));
+
+function TodoList({ todos }: Props) {
+	const { create } = useTodoApi();
 	const onCreate = ({ title, content }: TodoTitleContentState) =>
 		create.mutate({ title, content });
-	const onUpdate = ({ id, title, content }: TodoTitleContentIdState) =>
-		update.mutate({ id, title, content });
-	const onDelete = (id: TodoIdState) => {
-		remove.mutate(id);
-	};
 
-	useEffect(() => {
-		if (remove.isSuccess) {
-			queryClient.invalidateQueries(['todoList']);
-		}
-	}, [remove.isSuccess]);
 	const [{ title, content }, onChange] = useInputMultiple({
 		title: '',
 		content: '',
@@ -63,17 +48,12 @@ function TodoList({ todos }: TodoListProps) {
 					할 일을 추가 해보아요
 				</Button>
 			</Styles.ItemAddContainer>
-			<Styles.ItemContainer gap={2} maxHeight="500px" overflow="scroll">
-				{Array.isArray(todos) &&
-					todos?.map(todo => (
-						<TodoItem
-							key={todo.id}
-							item={todo}
-							onUpdate={onUpdate}
-							onDelete={onDelete}
-						/>
-					))}
-			</Styles.ItemContainer>
+			<Suspense fallback={<SplashScreen />}>
+				<Styles.ItemContainer gap={2} maxHeight="500px" overflow="scroll">
+					{Array.isArray(todos) &&
+						todos.map(todo => <TodoItem key={todo.id} item={todo} />)}
+				</Styles.ItemContainer>
+			</Suspense>
 		</Styles.Warp>
 	);
 }

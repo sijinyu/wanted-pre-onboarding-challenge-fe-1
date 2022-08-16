@@ -8,6 +8,7 @@ const Warp = styled(Box)(({ theme }) => ({
 const Header = styled(Box)(({ theme }) => ({
 	display: 'flex',
 	minHeight: '220px',
+	backgroundColor: '#6667AB',
 	alignItems: 'center',
 	justifyContent: 'center',
 }));

@@ -20,7 +20,6 @@ export default function SignIn() {
 	});
 	const { signIn, message, isValidate } = useSignIn({ email, password });
 	const handleSubmit = () => signIn.mutate({ email, password });
-
 	return (
 		<Container component="main" maxWidth="xs">
 			<Box
@@ -71,11 +70,13 @@ export default function SignIn() {
 						로그인
 					</Button>
 				</Box>
+
 				{message && (
 					<Alert sx={{ width: '100%', mt: 1 }} severity="error">
 						{message}
 					</Alert>
 				)}
+
 				<Stack width="100%" sx={{ mt: 1 }} alignItems="flex-end">
 					<Button variant="contained" onClick={() => navigate('/auth/signUp')}>
 						회원가입

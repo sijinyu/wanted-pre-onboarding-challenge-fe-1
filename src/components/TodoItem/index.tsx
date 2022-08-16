@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonBase, Grid, Typography } from '@mui/material';
+import { useQueryClient } from 'react-query';
 import { Outlet, useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,31 +8,38 @@ import CancleIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
 import { Styles } from './styles';
 import {
+	TodoIdState,
 	TodoTitleContentIdState,
 	TodoTitleContentState,
 } from '@/repository/todo';
 import { useInputMultiple } from '@/hooks';
 
-interface ITodoItem {
+import { useTodoApi } from '@/controller/todo/useTodoApi';
+
+interface Props {
 	item: TodoTitleContentIdState;
-	onUpdate: any;
-	onDelete: any;
 }
-function TodoItem({ item, onUpdate, onDelete }: ITodoItem) {
+function TodoItem({ item }: Props) {
+	const { update, remove } = useTodoApi();
 	const navigate = useNavigate();
 	const [isNotModify, setIsNotModify] = useState(true);
-	const [prevState, setPrevState] = useState<TodoTitleContentState>();
+	const onUpdate = ({ id, title, content }: TodoTitleContentIdState) =>
+		update.mutate({ id, title, content });
+	const onDelete = (id: TodoIdState) => {
+		remove.mutate(id);
+	};
+
 	const [{ title, content }, onChange, reset] = useInputMultiple({
 		title: item.title,
 		content: item.content,
 	});
+
 	const handeModify = () => {
 		setIsNotModify(false);
-		setPrevState({ title, content });
 	};
 	const handleModifyCancle = () => {
 		setIsNotModify(true);
-		reset(prevState);
+		reset();
 	};
 	const handleModfyComplete = () => {
 		setIsNotModify(true);
@@ -40,6 +48,7 @@ function TodoItem({ item, onUpdate, onDelete }: ITodoItem) {
 	const moveDetail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		navigate(`/${item.id}`, { state: { id: item.id } });
 	};
+
 	return (
 		<Styles.Container>
 			<Grid
