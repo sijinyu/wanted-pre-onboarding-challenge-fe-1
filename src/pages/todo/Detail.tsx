@@ -10,11 +10,12 @@ interface TodoUpdateState {
 	isNotModify: boolean;
 	onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
+
 function Detail() {
-	const { id, content, title, isNotModify, onChange } =
-		useOutletContext<TodoUpdateState>();
 	const location = useLocation();
 	const state = location.state as TodoIdState;
+	const { id, content, title, isNotModify, onChange } =
+		useOutletContext<TodoUpdateState>();
 	if (state.id !== id) return null;
 	return (
 		<Container

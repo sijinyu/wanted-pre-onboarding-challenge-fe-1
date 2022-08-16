@@ -1,21 +1,28 @@
 import React, { useEffect } from 'react';
-import { Container } from '@mui/material';
+import { Container, Snackbar } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Header from '@/components/Layout/Header';
 import { localStorage } from '@/common/utils';
+import { Auth } from '@/constant';
 
 function AuthLayout() {
 	const navigate = useNavigate();
-	const auth: string = localStorage.getLocalStorage('token');
+
+	const authToken: any = localStorage.getLocalStorage(Auth.Key.Token);
+
 	useEffect(() => {
-		if (!auth) {
-			alert('토큰이 유효하지 않습니다.');
+		if (!authToken) {
+			<Snackbar
+				open
+				autoHideDuration={6000}
+				message={Auth.Message.TokenValid}
+			/>;
 			navigate('/auth/signIn', { replace: true });
 		}
-	}, [auth, navigate]);
+	}, [authToken, navigate]);
 	return (
 		<Container>
-			<Header token={auth} />
+			<Header token={authToken} />
 			<Outlet />
 		</Container>
 	);

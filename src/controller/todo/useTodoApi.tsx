@@ -14,6 +14,7 @@ export const useTodoApi = () => ({
 		todoRepository.create,
 		{
 			onSuccess: () => {
+				// TODO :: 백엔드 에러가 성공으로 들어오기 때문에. 에러처리하기
 				handleInvalidateQueries(todoListKey);
 			},
 		},
@@ -21,7 +22,7 @@ export const useTodoApi = () => ({
 	update: useMutation<{ data: TodoResponse }, Error, TodoTitleContentIdState>(
 		todoRepository.update,
 		{
-			onSuccess: response => {
+			onSuccess: () => {
 				handleInvalidateQueries(todoListKey);
 			},
 		},

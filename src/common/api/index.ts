@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { localStorage } from '@/common/utils';
+import { Auth } from '@/constant';
 
 const baseURL = process.env.REACT_APP_API_URL;
 
@@ -33,9 +34,11 @@ Api.interceptors.response.use(
 			const {
 				response: { status },
 			} = error;
-			const tokenExpiration = status === 400 || status === 401;
+			const tokenExpiration = status === 401;
 			if (tokenExpiration) {
-				alert('토큰이 유효하지 않습니다. 재 로그인 해주세요.');
+				alert(
+					Auth.Message.TokenValid,
+				); /* 얼럿 없애기 portal를 사용한 modal을 만들지 , mui snackBar로 할지 고민 아니? 일단 잠이오기 때문에 잔다. */
 				localStorage.removeLocalStorage('token');
 				window.location.href = `/auth/signIn`;
 			}
