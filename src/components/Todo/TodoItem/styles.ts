@@ -1,10 +1,11 @@
-import { Box, styled } from '@mui/material';
+import { Accordion, Box, styled } from '@mui/material';
 
-const Container = styled(Box)(({ theme }) => ({
+const Wrap = styled(Box)(({ theme }) => ({
 	width: '100%',
 	boxShadow: '0px 4px 7px -2px rgba(0,0,0,0.28)',
-	borderRadius: '40px',
-	padding: '20px',
+	borderRadius: theme.spacing(5),
+	padding: theme.spacing(2.5),
+	background: theme.palette.primary.main,
 }));
 const LeftItem = styled(Box)(({ theme }) => ({
 	width: '100%',
@@ -20,7 +21,7 @@ const RightItem = styled(Box)(({ theme }) => ({
 	gap: '12px',
 }));
 export const Styles = {
-	Container,
+	Wrap,
 	LeftItem,
 	RightItem,
 };

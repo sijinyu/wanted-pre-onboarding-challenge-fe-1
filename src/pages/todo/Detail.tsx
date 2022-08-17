@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Input } from '@mui/material';
+import { Container, Input, TextField } from '@mui/material';
 import { useLocation, useOutletContext } from 'react-router-dom';
 import { TodoIdState } from '@/repository/todo';
 
@@ -27,26 +27,24 @@ function Detail() {
 				borderRadius: '20px',
 			}}
 		>
-			<span>제목</span>
-			<Input
+			<TextField
 				value={title}
-				multiline
-				maxRows={4}
+				required
 				fullWidth
+				inputProps={{ maxLength: 25 }}
+				type="text"
 				onChange={onChange}
 				name="title"
-				readOnly={isNotModify}
-				disableUnderline
+				disabled={isNotModify}
 			/>
-			<span>내용</span>
-			<Input
+			<TextField
 				multiline
+				maxRows={4}
 				value={content}
 				name="content"
 				fullWidth
 				onChange={onChange}
-				readOnly={isNotModify}
-				disableUnderline
+				disabled={isNotModify}
 			/>
 		</Container>
 	);

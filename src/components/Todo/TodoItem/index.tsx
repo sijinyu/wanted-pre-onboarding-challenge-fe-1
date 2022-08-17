@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
-import { ButtonBase, Grid, Typography } from '@mui/material';
-import { useQueryClient } from 'react-query';
+import {
+	AccordionDetails,
+	AccordionSummary,
+	ButtonBase,
+	Grid,
+	Typography,
+} from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CancleIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
 import { Styles } from './styles';
-import {
-	TodoIdState,
-	TodoTitleContentIdState,
-	TodoTitleContentState,
-} from '@/repository/todo';
+import { TodoIdState, TodoTitleContentIdState } from '@/repository/todo';
 import { useInputMultiple } from '@/hooks';
 
-import { useTodoApi } from '@/controller/todo/useTodoApi';
+import { useTodos } from '@/controller/todo/useTodos';
 
 interface Props {
 	item: TodoTitleContentIdState;
 }
 function TodoItem({ item }: Props) {
-	const { update, remove } = useTodoApi();
+	const { updateTodo, deleteTodo } = useTodos();
 	const navigate = useNavigate();
 	const [isNotModify, setIsNotModify] = useState(true);
-	const onUpdate = ({ id, title, content }: TodoTitleContentIdState) =>
-		update.mutate({ id, title, content });
-	const onDelete = (id: TodoIdState) => {
-		remove.mutate(id);
-	};
 
 	const [{ title, content }, onChange, reset] = useInputMultiple({
 		title: item.title,
@@ -35,7 +31,7 @@ function TodoItem({ item }: Props) {
 	});
 
 	const handeModify = () => {
-		setIsNotModify(false);
+		setIsNotModify(prev => !prev);
 	};
 	const handleModifyCancle = () => {
 		setIsNotModify(true);
@@ -43,21 +39,19 @@ function TodoItem({ item }: Props) {
 	};
 	const handleModfyComplete = () => {
 		setIsNotModify(true);
-		onUpdate({ id: item.id, title, content });
+		updateTodo({ id: item.id, title, content });
 	};
 	const moveDetail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		navigate(`/${item.id}`, { state: { id: item.id } });
 	};
 
 	return (
-		<Styles.Container>
-			<Grid
-				container
-				justifyContent="space-between"
-				onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-					moveDetail(e)
-				}
-			>
+		<Styles.Wrap
+			onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
+				moveDetail(e)
+			}
+		>
+			<Grid container justifyContent="space-between">
 				<Grid item>
 					<Styles.LeftItem>
 						<Typography>{title}</Typography>
@@ -79,7 +73,10 @@ function TodoItem({ item }: Props) {
 								</ButtonBase>
 							</>
 						)}
-						<ButtonBase onClick={() => onDelete({ id: item.id })} disableRipple>
+						<ButtonBase
+							onClick={() => deleteTodo({ id: item.id })}
+							disableRipple
+						>
 							<DeleteIcon color="action" />
 						</ButtonBase>
 					</Styles.RightItem>
@@ -88,7 +85,7 @@ function TodoItem({ item }: Props) {
 			<Outlet
 				context={{ id: item.id, content, title, isNotModify, onChange }}
 			/>
-		</Styles.Container>
+		</Styles.Wrap>
 	);
 }
 

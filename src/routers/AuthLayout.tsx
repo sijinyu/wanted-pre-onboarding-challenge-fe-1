@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Container, Snackbar } from '@mui/material';
+import { Snackbar } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Header from '@/components/Layout/Header';
 import { localStorage } from '@/common/utils';
 import { Auth } from '@/constant';
+import CustomContainer from '@/components/Layout/Container';
 
 function AuthLayout() {
 	const navigate = useNavigate();
@@ -21,10 +22,10 @@ function AuthLayout() {
 		}
 	}, [authToken, navigate]);
 	return (
-		<Container>
+		<CustomContainer>
 			<Header token={authToken} />
 			<Outlet />
-		</Container>
+		</CustomContainer>
 	);
 }
 export default AuthLayout;
