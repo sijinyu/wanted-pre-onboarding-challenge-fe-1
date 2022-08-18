@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Header from '@/components/Layout/Header';
 import { localStorage } from '@/common/utils';
 import { Auth } from '@/constant';
-import CustomContainer from '@/components/Layout/Container';
 
 function AuthLayout() {
 	const navigate = useNavigate();
@@ -22,10 +21,10 @@ function AuthLayout() {
 		}
 	}, [authToken, navigate]);
 	return (
-		<CustomContainer>
+		<>
 			<Header token={authToken} />
 			<Outlet />
-		</CustomContainer>
+		</>
 	);
 }
 export default AuthLayout;

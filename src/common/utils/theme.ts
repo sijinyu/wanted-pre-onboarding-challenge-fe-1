@@ -10,7 +10,8 @@ const theme = createTheme({
 				body: {
 					backgroundImage: `url(${mainBg})`,
 					backgroundPosition: 'center',
-					backgroundSize: '100%',
+					backgroundRepeat: 'no-repeat',
+					backgroundSize: '200%',
 				},
 				'body > #root > div': {
 					height: '100vh',

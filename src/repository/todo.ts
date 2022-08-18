@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import Api from '@/common/api';
 
 const todos = `todos`;
@@ -25,10 +26,7 @@ const todoRepository = {
 		const { data } = await Api.get<{ data: TodoResponse[] }>(todos);
 		return data;
 	},
-	getById: async (id: TodoIdState): Promise<{ data: TodoResponse }> => {
-		const { data } = await Api.get<{ data: TodoResponse }>(`${todos}/${id}`);
-		return data;
-	},
+	getById: async (id: string) => (await Api.get(`${todos}/${id}`)).data.data,
 	update: async ({
 		id,
 		...param

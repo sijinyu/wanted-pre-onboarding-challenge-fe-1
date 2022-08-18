@@ -1,4 +1,5 @@
-import { QueryClient } from 'react-query';
+import { QueryCache, QueryClient } from 'react-query';
+import toast from 'react-hot-toast';
 import { useApiError } from '@/common/utils/hooks/useApiError';
 
 export const queryClient = new QueryClient({
@@ -8,6 +9,7 @@ export const queryClient = new QueryClient({
 			retry: 0,
 			onError: useApiError,
 			suspense: true,
+			useErrorBoundary: true,
 		},
 	},
 });

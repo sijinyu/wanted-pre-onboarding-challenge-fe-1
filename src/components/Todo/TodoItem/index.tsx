@@ -1,90 +1,51 @@
-import React, { useState } from 'react';
-import {
-	AccordionDetails,
-	AccordionSummary,
-	ButtonBase,
-	Grid,
-	Typography,
-} from '@mui/material';
-import { Outlet, useNavigate } from 'react-router-dom';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React from 'react';
+import { ButtonBase, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import CancleIcon from '@mui/icons-material/Cancel';
 import CheckIcon from '@mui/icons-material/Check';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Styles } from './styles';
-import { TodoIdState, TodoTitleContentIdState } from '@/repository/todo';
-import { useInputMultiple } from '@/hooks';
-
+import { TodoTitleContentIdState } from '@/repository/todo';
 import { useTodos } from '@/controller/todo/useTodos';
+import TodoDetail from '../Modal/TodoDetail';
+import { useModalStore } from '@/store';
+import { ModalsProps } from '@/store/useModalStore';
 
 interface Props {
 	item: TodoTitleContentIdState;
 }
 function TodoItem({ item }: Props) {
-	const { updateTodo, deleteTodo } = useTodos();
-	const navigate = useNavigate();
-	const [isNotModify, setIsNotModify] = useState(true);
-
-	const [{ title, content }, onChange, reset] = useInputMultiple({
-		title: item.title,
-		content: item.content,
-	});
-
-	const handeModify = () => {
-		setIsNotModify(prev => !prev);
+	const { openModal } = useModalStore();
+	const { deleteTodo } = useTodos();
+	const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.stopPropagation();
+		deleteTodo({ id: item.id });
 	};
-	const handleModifyCancle = () => {
-		setIsNotModify(true);
-		reset();
+	const handleClick = () => {
+		openModal({
+			Component: TodoDetail,
+			id: item.id,
+		} as unknown as ModalsProps);
 	};
-	const handleModfyComplete = () => {
-		setIsNotModify(true);
-		updateTodo({ id: item.id, title, content });
-	};
-	const moveDetail = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		navigate(`/${item.id}`, { state: { id: item.id } });
-	};
-
 	return (
-		<Styles.Wrap
-			onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) =>
-				moveDetail(e)
-			}
-		>
-			<Grid container justifyContent="space-between">
-				<Grid item>
-					<Styles.LeftItem>
-						<Typography>{title}</Typography>
-					</Styles.LeftItem>
-				</Grid>
-				<Grid item>
-					<Styles.RightItem>
-						{isNotModify ? (
-							<ButtonBase onClick={() => handeModify()} disableRipple>
-								<EditIcon color="action" />
-							</ButtonBase>
-						) : (
-							<>
-								<ButtonBase onClick={() => handleModifyCancle()} disableRipple>
-									<CancleIcon color="action" />
-								</ButtonBase>
-								<ButtonBase onClick={() => handleModfyComplete()} disableRipple>
-									<CheckIcon color="action" />
-								</ButtonBase>
-							</>
-						)}
-						<ButtonBase
-							onClick={() => deleteTodo({ id: item.id })}
-							disableRipple
-						>
-							<DeleteIcon color="action" />
-						</ButtonBase>
-					</Styles.RightItem>
-				</Grid>
-			</Grid>
-			<Outlet
-				context={{ id: item.id, content, title, isNotModify, onChange }}
-			/>
+		<Styles.Wrap onClick={handleClick}>
+			<Styles.Header>
+				<Styles.LeftItem>
+					<Typography>{item.title}</Typography>
+				</Styles.LeftItem>
+				<Styles.RightItem>
+					<ButtonBase disableRipple>
+						<EditIcon color="action" />
+					</ButtonBase>
+					<ButtonBase disableRipple>
+						<CancleIcon color="action" />
+					</ButtonBase>
+					<ButtonBase onClick={e => handleDelete(e)} disableRipple>
+						<DeleteIcon color="action" />
+					</ButtonBase>
+				</Styles.RightItem>
+			</Styles.Header>
 		</Styles.Wrap>
 	);
 }

@@ -1,27 +1,26 @@
-import { Accordion, Box, styled } from '@mui/material';
+import { Accordion, Box, Stack, styled } from '@mui/material';
 
 const Wrap = styled(Box)(({ theme }) => ({
 	width: '100%',
 	boxShadow: '0px 4px 7px -2px rgba(0,0,0,0.28)',
+	cursor: 'pointer',
 	borderRadius: theme.spacing(5),
 	padding: theme.spacing(2.5),
 	background: theme.palette.primary.main,
 }));
-const LeftItem = styled(Box)(({ theme }) => ({
-	width: '100%',
-	wordBreak: 'break-all',
-	input: {
-		width: '100%',
-	},
-}));
-const RightItem = styled(Box)(({ theme }) => ({
-	display: 'flex',
+const Header = styled(Stack)(({ theme }) => ({
 	flexDirection: 'row',
-	alignItems: 'center',
-	gap: '12px',
 }));
+const LeftItem = styled(Box)(({ theme }) => ({
+	flexGrow: 1,
+	flexBasis: '100px',
+	wordBreak: 'break-all',
+}));
+const RightItem = styled(Box)(({ theme }) => ({}));
+
 export const Styles = {
 	Wrap,
+	Header,
 	LeftItem,
 	RightItem,
 };

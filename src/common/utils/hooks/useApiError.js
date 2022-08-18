@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 // 미완
 const commonHandler = () => console.log('공통 처리 로직 필요');
 const defaultHandler = () => console.log('어디에도 정의되지않은 에러');
+const handler400 = () => console.log('400 처리 로직 필요');
 const handler401 = () => console.log('401 처리 로직 필요');
 const handler403 = () => console.log('403 처리 로직 필요');
 const handler40910001 = () => console.log('409 -> 1001 처리 로직 필요');
@@ -11,6 +12,9 @@ const handler500 = () => console.log('500 처리 로직 필요');
 const defaultHandlers = {
 	common: commonHandler,
 	default: defaultHandler,
+	400: {
+		default: handler400,
+	},
 	401: {
 		default: handler401,
 	},
@@ -26,8 +30,8 @@ const defaultHandlers = {
 	},
 };
 // 매개변수 handlers: 컴포넌트에서 재정의한 핸들러 모음 매개변수로 커스텀 가능
-
 export const useApiError = handlers => {
+	console.log(handlers, 'hamde;r');
 	// 우선순위에 따른 핸들러의 선택과 실행
 	const handleError = useCallback(
 		error => {
@@ -35,7 +39,7 @@ export const useApiError = handlers => {
 			const serviceCode = error.response.meta.code; // 서비스 표준 에러 Code
 			switch (true) {
 				case handlers && handlers[httpStatus][serviceCode]:
-					// 우선순위 1. 컴포넌트에서 (HTTP Status, 서비스 표준 에러 Code) Key 조합으로 재정의한 핸들러
+					// 우선순위 1. 컴포넌트에서 (HTTP Status, 서비스x 표준 에러 Code) Key 조합으로 재정의한 핸들러
 					handlers[httpStatus][serviceCode]();
 					break;
 				case handlers && handlers[httpStatus]:

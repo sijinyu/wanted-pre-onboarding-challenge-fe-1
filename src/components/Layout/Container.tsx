@@ -1,17 +1,15 @@
 import React from 'react';
-import { styled, Container } from '@mui/material';
-import images from '@/common/images';
-
-const { mainBg } = images;
-interface Props {
-	children: React.ReactNode;
-}
+import { styled, Container, ContainerProps } from '@mui/material';
 
 const StyledContainer = styled(Container)(({ theme, ...props }) => ({
-	// backgroundImage: `url(${mainBg})`,
+	padding: theme.spacing(3),
 }));
-function CustomContainer({ children }: Props) {
-	return <StyledContainer>{children}</StyledContainer>;
+function CustomContainer<P extends ContainerProps>({
+	children,
+	...props
+}: ContainerProps) {
+	// eslint-disable-next-line react/jsx-props-no-spreading
+	return <StyledContainer {...(props as P)}>{children}</StyledContainer>;
 }
 
 export default CustomContainer;
