@@ -1,7 +1,6 @@
 import { Box, Stack, styled } from '@mui/material';
 
 const Wrap = styled(Stack)(({ theme }) => ({
-	background: theme.palette.secondary.main,
 	overflow: 'hidden',
 	minWidth: '500px',
 	minHeight: '300px',

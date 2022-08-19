@@ -7,7 +7,11 @@ const theme = createTheme({
 	components: {
 		MuiCssBaseline: {
 			styleOverrides: {
+				html: {
+					height: '100%',
+				},
 				body: {
+					height: '100%',
 					backgroundImage: `url(${mainBg})`,
 					backgroundPosition: 'center',
 					backgroundRepeat: 'no-repeat',

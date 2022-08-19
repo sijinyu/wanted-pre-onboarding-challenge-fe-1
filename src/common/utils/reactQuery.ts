@@ -6,10 +6,12 @@ export const queryClient = new QueryClient({
 		queries: {
 			refetchOnWindowFocus: false,
 			refetchOnMount: false,
+			onError: useApiError,
 			retry: 0,
-			// onError: useApiError,
 			suspense: true,
-			useErrorBoundary: true,
+		},
+		mutations: {
+			onError: useApiError,
 		},
 	},
 });
@@ -19,4 +21,8 @@ export const handleInvalidateQueries = (key: string | string[]) => {
 };
 export const handleAllInvalidateQueries = () => {
 	queryClient.invalidateQueries();
+};
+
+export const handleSetQueryData = <T>(key: string[], response: T) => {
+	queryClient.setQueryData(key, response);
 };

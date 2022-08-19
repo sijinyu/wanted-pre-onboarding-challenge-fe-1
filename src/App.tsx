@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { QueryClientProvider } from 'react-query';
-import Router from '@/routers';
+
 import { queryClient } from '@/common/utils/reactQuery';
+import Router from '@/routers';
 import Modals from './components/Modals';
 
 function App() {

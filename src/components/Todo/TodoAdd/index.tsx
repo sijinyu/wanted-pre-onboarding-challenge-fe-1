@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField, Typography } from '@mui/material';
 import Button from '@/components/HOC/Button';
-import { TodoTitleContentState } from '@/repository/todo';
 import { useInputMultiple } from '@/hooks';
 import { useTodos } from '@/controller/todo/useTodos';
 import { Styles } from './styles';
 
 function TodoAdd() {
 	const { createTodo } = useTodos();
+
 	const [{ title, content }, onChange] = useInputMultiple({
 		title: '',
 		content: '',
@@ -43,4 +43,4 @@ function TodoAdd() {
 	);
 }
 
-export default React.memo(TodoAdd);
+export default TodoAdd;

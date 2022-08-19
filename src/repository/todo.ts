@@ -22,10 +22,7 @@ export interface TodoResponse extends TodoBaseState {
 }
 
 const todoRepository = {
-	getAll: async (): Promise<{ data: TodoResponse[] }> => {
-		const { data } = await Api.get<{ data: TodoResponse[] }>(todos);
-		return data;
-	},
+	getAll: async () => (await Api.get(todos)).data.data,
 	getById: async (id: string) => (await Api.get(`${todos}/${id}`)).data.data,
 	update: async ({
 		id,
@@ -45,6 +42,7 @@ const todoRepository = {
 			title,
 			content,
 		});
+
 		return data;
 	},
 };

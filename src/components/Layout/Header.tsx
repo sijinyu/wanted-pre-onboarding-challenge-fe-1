@@ -8,7 +8,6 @@ function Header({ token }: any) {
 	const login = () => navigate('/auth/signIn');
 	const logOut = () => {
 		localStorage.removeLocalStorage('token');
-		alert('로그아웃이 완료 되었습니다.');
 		navigate('/auth/signIn');
 	};
 
@@ -16,11 +15,11 @@ function Header({ token }: any) {
 	const authButton = () => (token ? logOut() : login());
 
 	return (
-		<Box component="header" textAlign="right">
+		<Box component="header" textAlign="right" p={2}>
 			<Button
 				type="button"
 				onClick={() => authButton()}
-				variant="text"
+				variant="contained"
 				disableRipple
 			>
 				{authLabel()}

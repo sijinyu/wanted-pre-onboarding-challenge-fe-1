@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from 'react-query';
+import { AxiosError } from 'axios';
 import todoRepository, {
 	TodoIdState,
 	TodoResponse,
@@ -6,8 +7,8 @@ import todoRepository, {
 	TodoTitleContentState,
 } from '@/repository/todo';
 import {
-	handleAllInvalidateQueries,
 	handleInvalidateQueries,
+	handleSetQueryData,
 } from '@/common/utils/reactQuery';
 import { Todo } from '@/constant';
 
@@ -15,10 +16,9 @@ const { Key } = Todo;
 
 export const useTodos = () => {
 	const { data, ...queryResult } = useQuery([Key.todos], todoRepository.getAll);
-
 	const createTodo = useMutation<
 		{ data: TodoResponse },
-		Error,
+		AxiosError,
 		TodoTitleContentState
 	>(todoRepository.create, {
 		onSuccess: () => handleInvalidateQueries(Key.todos),
@@ -26,11 +26,14 @@ export const useTodos = () => {
 
 	const updateTodo = useMutation<
 		{ data: TodoResponse },
-		Error,
+		AxiosError,
 		TodoTitleContentIdState
 	>(todoRepository.update, {
 		onSuccess: response => {
-			handleInvalidateQueries(Key.todoById); // 캐시무효화를 해도 TodoDetail 리렌더가 안된다.
+			handleSetQueryData<TodoResponse>(
+				[Key.todoById, response.data.id],
+				response.data,
+			);
 			handleInvalidateQueries(Key.todos);
 		},
 	}).mutate;
@@ -44,7 +47,7 @@ export const useTodos = () => {
 
 	return {
 		...queryResult,
-		todos: data?.data,
+		todos: data,
 		createTodo,
 		updateTodo,
 		deleteTodo,

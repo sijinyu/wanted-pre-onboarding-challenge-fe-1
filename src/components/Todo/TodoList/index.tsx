@@ -3,6 +3,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { Styles } from './styles';
 import TodoItem from '../TodoItem';
 import TodoAdd from '@/components/Todo/TodoAdd';
@@ -18,16 +19,13 @@ function TodoList() {
 			</Styles.Header>
 			<Styles.Warp>
 				<TodoAdd />
-
 				<Styles.ListContainer>
 					<Styles.ListSummary
 						expandIcon={<ExpandMoreIcon />}
 						aria-controls="panel1a-content"
 						id="panel1a-header"
 					>
-						<Typography variant="h5" color="white">
-							{todos?.length} Task
-						</Typography>
+						<Typography variant="h5">{todos?.length} Task</Typography>
 					</Styles.ListSummary>
 
 					<Styles.ListDetail>

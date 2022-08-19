@@ -5,8 +5,8 @@ export default function ErrorFallBack({ error, resetErrorBoundary }: any) {
 	const { response } = error;
 	let message;
 	let status;
-	if (error.response.data) {
-		message = response.data.details;
+	if (error.response?.data) {
+		message = response?.data.details;
 		status = response.status;
 	} else {
 		message = error.message;
