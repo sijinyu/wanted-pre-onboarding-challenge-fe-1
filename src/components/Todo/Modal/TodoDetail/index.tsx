@@ -1,36 +1,32 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { Dialog, TextField, DialogTitle, DialogContent } from '@mui/material';
-
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { useTodoDetail } from '@/controller/todo/useTodoDetail';
 import { useInputMultiple } from '@/hooks';
 import { Styles } from './styles';
+import { Todo } from '@/constant';
 
+const { Key } = Todo;
 interface Props {
 	id: string;
 	onClose: () => void;
-	onSubmit: () => void;
 }
 
-function TodoDetail({ id, onClose, onSubmit }: Props) {
+function TodoDetail({ id, onClose }: Props) {
 	const { todoDetail } = useTodoDetail(id);
-
-	const handleClickSubmit = () => {
-		onSubmit();
-	};
 	const handleClickCancel = () => {
 		onClose();
 	};
 	const [{ title, content }] = useInputMultiple({
-		title: todoDetail?.title,
-		content: todoDetail?.content,
+		title: todoDetail.title,
+		content: todoDetail.content,
 	});
 
 	return (
 		<Dialog open onClick={handleClickCancel}>
 			<Styles.Wrap>
-				<DialogTitle>{title}</DialogTitle>
-				<DialogContent>{content}</DialogContent>
+				<DialogTitle>제목 : {title}</DialogTitle>
+				<DialogContent>내용 : {content}</DialogContent>
 			</Styles.Wrap>
 		</Dialog>
 	);

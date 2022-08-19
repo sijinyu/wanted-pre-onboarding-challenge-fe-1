@@ -4,36 +4,36 @@ import create from 'zustand';
 
 export interface ModalsProps {
 	id: number;
+	key: number;
 	Component: any;
 	props: DialogProps[] | any;
 }
 
 interface ModalActions {
 	openModal: ({ Component, ...props }: ModalsProps) => void;
-	closeModal: ({ id, Component }: ModalsProps) => void;
+	closeModal: (id: number) => void;
 }
 interface GlobalState extends ModalActions {
 	openedModals: ModalsProps[];
 }
 export const useModalStore = create<GlobalState>(set => ({
 	openedModals: [],
-	openModal: ({ Component, ...props }) => {
+	openModal: ({ Component, id, ...props }) => {
 		set(state => ({
 			openedModals: [
 				...state.openedModals,
 				{
-					id: state.openedModals.length + 1,
+					key: state.openedModals.length + 1,
+					id,
 					Component,
 					props,
 				} as unknown as ModalsProps,
 			],
 		}));
 	},
-	closeModal: ({ id }) => {
+	closeModal: id => {
 		set(state => ({
-			openedModals: state.openedModals.filter(
-				(modal: ModalsProps) => modal.id !== id,
-			),
+			openedModals: state.openedModals.filter(modal => modal.id !== id),
 		}));
 	},
 }));

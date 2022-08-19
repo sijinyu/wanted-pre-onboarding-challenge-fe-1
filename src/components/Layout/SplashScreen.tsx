@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, styled } from '@mui/material';
-import { CircleRounded } from '@mui/icons-material';
+import { Box, CircularProgress, Stack, styled } from '@mui/material';
 
 const StyleSplash = styled(Box)(({ theme, ...props }) => ({
 	position: 'absolute',
@@ -11,11 +10,10 @@ const StyleSplash = styled(Box)(({ theme, ...props }) => ({
 	width: '100vw',
 	height: '100vh',
 }));
-
 export default function SplashScreen() {
 	return (
 		<StyleSplash>
-			<CircleRounded />
+			<CircularProgress color="success" />
 		</StyleSplash>
 	);
 }

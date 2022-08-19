@@ -30,13 +30,9 @@ const todoRepository = {
 	update: async ({
 		id,
 		...param
-	}: TodoTitleContentIdState): Promise<{ data: TodoResponse }> => {
-		const { data } = await Api.put<{ data: TodoResponse }>(
-			`${todos}/${id}`,
-			param,
-		);
-		return data;
-	},
+	}: TodoTitleContentIdState): Promise<{ data: TodoResponse }> =>
+		(await Api.put(`${todos}/${id}`, param)).data,
+
 	delete: async ({ id }: TodoIdState): Promise<{ data: null }> => {
 		const { data } = await Api.delete<{ data: null }>(`${todos}/${id}`);
 		return data;

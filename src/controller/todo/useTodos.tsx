@@ -5,13 +5,17 @@ import todoRepository, {
 	TodoTitleContentIdState,
 	TodoTitleContentState,
 } from '@/repository/todo';
-import { handleInvalidateQueries } from '@/common/utils/reactQuery';
+import {
+	handleAllInvalidateQueries,
+	handleInvalidateQueries,
+} from '@/common/utils/reactQuery';
 import { Todo } from '@/constant';
 
 const { Key } = Todo;
 
 export const useTodos = () => {
-	const { data, ...queryResult } = useQuery(Key.todos, todoRepository.getAll);
+	const { data, ...queryResult } = useQuery([Key.todos], todoRepository.getAll);
+
 	const createTodo = useMutation<
 		{ data: TodoResponse },
 		Error,
@@ -19,13 +23,18 @@ export const useTodos = () => {
 	>(todoRepository.create, {
 		onSuccess: () => handleInvalidateQueries(Key.todos),
 	}).mutate;
+
 	const updateTodo = useMutation<
 		{ data: TodoResponse },
 		Error,
 		TodoTitleContentIdState
 	>(todoRepository.update, {
-		onSuccess: () => handleInvalidateQueries(Key.todos),
+		onSuccess: response => {
+			handleInvalidateQueries(Key.todoById); // 캐시무효화를 해도 TodoDetail 리렌더가 안된다.
+			handleInvalidateQueries(Key.todos);
+		},
 	}).mutate;
+
 	const deleteTodo = useMutation<{ data: null }, Error, TodoIdState>(
 		todoRepository.delete,
 		{

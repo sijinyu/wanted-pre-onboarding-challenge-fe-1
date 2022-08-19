@@ -3,9 +3,6 @@ import {
 	AccordionDetails,
 	AccordionSummary,
 	Box,
-	Container,
-	Grid,
-	Stack,
 	styled,
 	Typography,
 } from '@mui/material';
@@ -18,9 +15,8 @@ const Warp = styled(Box)(({ theme }) => ({
 const ListContainer = styled(Accordion)(({ theme }) => ({
 	background: theme.palette.secondary.main,
 	borderRadius: theme.spacing(3),
-
 	opacity: 0.8,
-	margin: theme.spacing(2.5),
+	margin: `${theme.spacing(3)} 0`,
 }));
 const ListSummary = styled(AccordionSummary)(({ theme }) => ({}));
 const ListDetail = styled(AccordionDetails)(({ theme }) => ({

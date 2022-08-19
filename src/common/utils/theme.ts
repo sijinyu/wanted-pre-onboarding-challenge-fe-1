@@ -13,8 +13,8 @@ const theme = createTheme({
 					backgroundRepeat: 'no-repeat',
 					backgroundSize: '200%',
 				},
-				'body > #root > div': {
-					height: '100vh',
+				textarea: {
+					minHeight: '300px',
 				},
 			},
 		},

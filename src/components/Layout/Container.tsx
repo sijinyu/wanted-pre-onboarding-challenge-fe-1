@@ -3,6 +3,7 @@ import { styled, Container, ContainerProps } from '@mui/material';
 
 const StyledContainer = styled(Container)(({ theme, ...props }) => ({
 	padding: theme.spacing(3),
+	marginBottom: theme.spacing(6),
 }));
 function CustomContainer<P extends ContainerProps>({
 	children,

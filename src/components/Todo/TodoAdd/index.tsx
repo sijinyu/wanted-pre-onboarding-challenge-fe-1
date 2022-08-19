@@ -15,21 +15,28 @@ function TodoAdd() {
 	return (
 		<Styles.Wrap>
 			<Styles.TopContainer>
-				<TextField fullWidth label="제목" name="title" onChange={onChange} />
+				<TextField
+					fullWidth
+					name="title"
+					inputMode="text"
+					placeholder="제목 최대(20자)"
+					inputProps={{ maxLength: 20 }}
+					onChange={onChange}
+				/>
 				<TextField
 					multiline
 					maxRows={4}
-					label="내용"
 					placeholder="조금 더 자세히 계획 해봐요!"
 					name="content"
 					onChange={onChange}
 				/>
 			</Styles.TopContainer>
 			<Styles.ButtonContaier>
-				<Button onClick={() => createTodo({ title, content })}>
-					<Typography variant="h5" color="white">
-						추가
-					</Typography>
+				<Button
+					variant="contained"
+					onClick={() => createTodo({ title, content })}
+				>
+					<Typography variant="h5">추가</Typography>
 				</Button>
 			</Styles.ButtonContaier>
 		</Styles.Wrap>
