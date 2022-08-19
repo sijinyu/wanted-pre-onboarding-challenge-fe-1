@@ -29,8 +29,8 @@ TodoList를 위와 같이 감싸줬습니다. QueryErrorResetBoundary로 Todos�
 1. 설치
 백엔드 : [https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-ap](https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api)
 2. 환경설정
-.env 파일 생성 REACT_APP_API_URL = “서버”
-코드 규칙 : eslint, prettier (airbnb config)
+.env 파일 생성 REACT_APP_API_URL = “서버”,
+코드 규칙 : eslint, prettier (airbnb config),
 node : 18.6.0
 3. 실행방법
 
