@@ -24,7 +24,7 @@ TodoList를 위와 같이 감싸줬습니다. QueryErrorResetBoundary로 Todos�
 
 빈화면이 아닌 에러메세지와 재요청 버튼을 보여줘 사용자경험을 향상 시켰습니다.
 
-### 설치, 환경설정 및 실행방법
+## **설치, 환경설정 및 실행방법**
 
 1. 설치
 백엔드 : [https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-ap](https://github.com/starkoora/wanted-pre-onboarding-challenge-fe-1-api)
@@ -42,7 +42,7 @@ npm start
 
 ---
 
-### 구현 요구 사항 목록
+## **구현 요구 사항 목록**
 
 ## Assignment 1 - Login / SignUp
 
@@ -75,7 +75,7 @@ npm start
 
 ---
 
-### 사용한 프레임워크 및 라이브러리 설명
+## **사용한 프레임워크 및 라이브러리 설명**
 
 ![스크린샷 2022-08-20 오전 3 03 45](https://user-images.githubusercontent.com/59022492/185701436-bbb369db-f5cf-40e2-b0a0-ba71c1540c3c.png)
 
@@ -112,7 +112,7 @@ npm start
 
 ---
 
-## 폴더 구조
+## **폴더 구조**
 
 ├── @types
 │   └── index.ts
@@ -216,7 +216,7 @@ npm start
 
 자바 스프링 프레임워크 디렉토리를 많이 참조했습니다.
 
-### 고민했던 부분
+## **고민했던 부분**
 
 디렉토리 구조 , spring 프레임 워크 구조를 조금 참고 삼아
 폴더를 나눴지만 정해진게 없다보니 항상 고민 하게 됍니다.
@@ -240,7 +240,7 @@ Modal이 늘어날시 사용되는 로직들 (onOpen, onClose, onSubmit등)을 �
 
 openModal(컴포넌트모달 , props) → 배열에들어가있는 모달들 modals컴포넌트에서 관리 → app.tsx내에 <Modals> 선언
 
-### I learned
+## **I learned**
 
 **뷰**와 **비즈니스로직** 분리가 조금 더 명확해졌습니다.
 
@@ -260,7 +260,7 @@ openModal(컴포넌트모달 , props) → 배열에들어가있는 모달들 mod
 
 React-Query를 활용하는 법을 자세히 배울 수 있었습니다.
 
-### **프리온보딩 챌린지 후기**
+## **프리온보딩 챌린지 후기**
 
 사수없이 혼자 개발하고있어 막막할때도 있었고 방식에대한 고민도 많았는데
 방향이 명확해졌습니다. 정말 많이 배울 수 있는 계기가 되었고 
