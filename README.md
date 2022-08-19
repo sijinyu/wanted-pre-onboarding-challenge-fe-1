@@ -11,9 +11,7 @@
 ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
 
-## 1일차 과제
-
- 🌝 https://sudden-author-9b0.notion.site/1-90942c7281d14c58a8fcb49fadc875d6
+![login](https://user-images.githubusercontent.com/59022492/185672890-18f53325-de30-46ed-8dc1-784bb33a898c.gif)
 
 
 ## Assignment 1 - Login / SignUp
