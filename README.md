@@ -14,7 +14,7 @@
 ![login](https://user-images.githubusercontent.com/59022492/185672890-18f53325-de30-46ed-8dc1-784bb33a898c.gif)
 ![todo](https://user-images.githubusercontent.com/59022492/185673680-3e42b252-e0a5-4c81-8452-017c2cb95eb7.gif)
 ![errorboundary](https://user-images.githubusercontent.com/59022492/185673643-1e2877ae-c35f-4fb9-8ab0-3b963a0d49c6.gif)
-![스크린샷 2022-08-20 오전 2 27 45](https://user-images.githubusercontent.com/59022492/185674778-1780668b-3dd2-467b-9853-d3eb231e5fb5.png)
+<!-- ![스크린샷 2022-08-20 오전 2 27 45](https://user-images.githubusercontent.com/59022492/185674778-1780668b-3dd2-467b-9853-d3eb231e5fb5.png) -->
 
 ## Assignment 1 - Login / SignUp
 
