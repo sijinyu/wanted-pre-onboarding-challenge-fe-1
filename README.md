@@ -114,7 +114,7 @@ npm start
 
 ## **폴더 구조**
 
-<code>
+```jsx
 ├── @types
 │   └── index.ts
 ├── App.tsx
@@ -203,7 +203,7 @@ npm start
 └── store
 ├── index.ts
 └── useModalStore.ts
-</code>
+```
 
 - @types : 써드 파티 라이브러리 타입 설정들
 - assets : 이미지, 비디오, json파일 등
