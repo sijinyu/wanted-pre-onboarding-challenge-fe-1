@@ -18,7 +18,7 @@
 ![errorboundary](https://user-images.githubusercontent.com/59022492/185673643-1e2877ae-c35f-4fb9-8ab0-3b963a0d49c6.gif)
 <!-- ![스크린샷 2022-08-20 오전 2 27 45](https://user-images.githubusercontent.com/59022492/185674778-1780668b-3dd2-467b-9853-d3eb231e5fb5.png) -->
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3f706a2e-dc05-482e-9fe9-f7ab1c4ce1c3/Untitled.png)
+![스크린샷 2022-08-20 오전 4 33 12](https://user-images.githubusercontent.com/59022492/185701223-61cee1b7-cb6c-4f2e-bab2-4d6b79248931.png)
 
 TodoList를 위와 같이 감싸줬습니다. QueryErrorResetBoundary로 Todos요청시 에러가 발생하면
 
@@ -77,9 +77,10 @@ npm start
 
 ### 사용한 프레임워크 및 라이브러리 설명
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/05a37c9a-726a-43a2-8f94-d3e5ca1fe399/Untitled.png)
+![스크린샷 2022-08-20 오전 3 03 45](https://user-images.githubusercontent.com/59022492/185701436-bbb369db-f5cf-40e2-b0a0-ba71c1540c3c.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3767df5f-4b82-4216-8362-0e55852984b2/Untitled.png)
+![스크린샷 2022-08-20 오전 3 21 33](https://user-images.githubusercontent.com/59022492/185701446-be7e1088-0464-4f22-b3b1-e1725ef24f15.png)
+
 
 **emotion** : mui지원, 스타일 컴포넌트/
 
@@ -228,13 +229,14 @@ npm start
 Modal이 늘어날시 사용되는 로직들 (onOpen, onClose, onSubmit등)을 공통으로
 관리하려 했습니다.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0f6094f9-0d34-4f43-bc2c-122b8623e30c/Untitled.png)
+![스크린샷 2022-08-20 오전 5 14 48](https://user-images.githubusercontent.com/59022492/185701603-7c08351b-10ba-4fca-a8a7-db93860be37d.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/63abcfc8-be8f-4e89-8245-a1d7cbd0d2dc/Untitled.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b2b59999-56fc-44d6-8ada-4e10dace9b18/Untitled.png)
+![스크린샷 2022-08-20 오전 5 09 30](https://user-images.githubusercontent.com/59022492/185701699-44c8de08-29ea-4044-ab1f-2e86d2a6bfa2.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/67268a2a-79b6-45a4-b136-9b8513a53f06/Untitled.png)
+![스크린샷 2022-08-20 오전 5 15 21](https://user-images.githubusercontent.com/59022492/185701787-f9e3c6e6-ee6e-441d-aa44-997689729ddc.png)
+
+![스크린샷 2022-08-20 오전 5 15 52](https://user-images.githubusercontent.com/59022492/185701764-9a1fb289-9077-49cf-8f07-4f2627d469ff.png)
 
 openModal(컴포넌트모달 , props) → 배열에들어가있는 모달들 modals컴포넌트에서 관리 → app.tsx내에 <Modals> 선언
 
