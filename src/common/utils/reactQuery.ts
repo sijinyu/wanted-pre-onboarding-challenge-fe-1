@@ -9,6 +9,7 @@ export const queryClient = new QueryClient({
 			onError: useApiError,
 			retry: 0,
 			suspense: true,
+			useErrorBoundary: true,
 		},
 		mutations: {
 			onError: useApiError,

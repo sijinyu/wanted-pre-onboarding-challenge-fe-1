@@ -1,9 +1,11 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { toast } from 'react-toastify';
 
 const commonHandler = () => console.log('공통 에러');
 const defaultHandler = () => console.log('어디에도 정의되지않은 에러');
-const handler400 = error => toast.error(error);
+const handler400 = error => {
+	toast.error(error);
+};
 const handler401 = () => console.log('401 처리 로직 필요');
 const handler403 = () => console.log('403 처리 로직 필요');
 const handler500 = () => console.log('500 처리 로직 필요');

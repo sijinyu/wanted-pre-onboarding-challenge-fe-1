@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
-import React, { Suspense } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { QueryErrorResetBoundary } from 'react-query';
 import { useModalStore } from '@/store';
@@ -9,6 +9,7 @@ import SplashScreen from '../Layout/SplashScreen';
 import ErrorFallBack from '../Error';
 
 function Modals(): any {
+	// typescript에서 ReactElement 배열타입으로 안된다고 합니다. 버그
 	const { openedModals, closeModal } = useModalStore();
 	if (openedModals.length <= 0) return null;
 	return openedModals.map((modal: ModalsProps) => {

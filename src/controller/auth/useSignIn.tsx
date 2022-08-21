@@ -9,8 +9,6 @@ const { emailValidate, passwordValidate } = auth;
 
 export const useSignIn = ({ email, password }: UserState) => {
 	const [isValidate, setIsValidate] = useState(true);
-	const [message, setMessage] = useState('');
-
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -26,13 +24,7 @@ export const useSignIn = ({ email, password }: UserState) => {
 				localStorage.setLocalStorage('token', token);
 				navigate('/', { replace: true });
 			},
-			onError: error => {
-				if (error instanceof AxiosError) {
-					setMessage(error?.response?.data.details || error.message);
-				}
-			},
 		}),
-		message,
 		isValidate,
 	};
 };

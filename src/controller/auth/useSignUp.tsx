@@ -10,7 +10,6 @@ const { emailValidate, passwordValidate } = auth;
 
 export const useSignUp = ({ email, password }: UserState) => {
 	const [isValidate, setIsValidate] = useState(true);
-	const [message, setMessage] = useState('');
 
 	const navigate = useNavigate();
 
@@ -20,16 +19,10 @@ export const useSignUp = ({ email, password }: UserState) => {
 
 	return {
 		signUp: useMutation<AuthResponse, Error, UserState>(authRepository.signUp, {
-			onSuccess: (response: AuthResponse) => {
+			onSuccess: () => {
 				navigate('/auth/signIn', { replace: true });
 			},
-			onError: error => {
-				if (error instanceof AxiosError) {
-					setMessage(error.response?.data.details || error.message);
-				}
-			},
 		}),
-		message,
 		isValidate,
 	};
 };

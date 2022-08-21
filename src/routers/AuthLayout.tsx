@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Snackbar } from '@mui/material';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Header from '@/components/Layout/Header';
 import { localStorage } from '@/common/utils';
 import { Auth } from '@/constant';
@@ -12,11 +12,7 @@ function AuthLayout() {
 
 	useEffect(() => {
 		if (!authToken) {
-			<Snackbar
-				open
-				autoHideDuration={6000}
-				message={Auth.Message.TokenValid}
-			/>;
+			toast.error(Auth.Message.TokenValid);
 			navigate('/auth/signIn', { replace: true });
 		}
 	}, [authToken, navigate]);

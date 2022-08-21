@@ -18,7 +18,7 @@ export default function SignIn() {
 		email: '',
 		password: '',
 	});
-	const { signIn, message, isValidate } = useSignIn({ email, password });
+	const { signIn, isValidate } = useSignIn({ email, password });
 	const handleSubmit = () => signIn.mutate({ email, password });
 
 	return (
@@ -71,12 +71,6 @@ export default function SignIn() {
 						로그인
 					</Button>
 				</Box>
-
-				{message && (
-					<Alert sx={{ width: '100%', mt: 1 }} severity="error">
-						{message}
-					</Alert>
-				)}
 
 				<Stack width="100%" sx={{ mt: 1 }} alignItems="flex-end">
 					<Button variant="contained" onClick={() => navigate('/auth/signUp')}>

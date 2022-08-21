@@ -1,7 +1,8 @@
+/* eslint-disable no-return-assign */
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { localStorage } from '@/common/utils';
 import { Auth } from '@/constant';
-import useAlert from '@/hooks/useAlert';
 
 const baseURL = process.env.REACT_APP_API_URL;
 
@@ -31,10 +32,12 @@ Api.interceptors.response.use(
 			response: { status },
 		} = error;
 		const tokenExpiration = status === 401;
-		if (tokenExpiration) {
-			useAlert(Auth.Message.TokenValid);
+		const tokenMissing = error.response?.data?.details === 'Token is missing';
+		if (tokenExpiration || tokenMissing) {
+			toast.error(Auth.Message.TokenValid, {
+				onClose: () => (window.location.href = `/auth/signIn`),
+			});
 			localStorage.removeLocalStorage('token');
-			window.location.href = `/auth/signIn`;
 		}
 		return Promise.reject(error);
 	},

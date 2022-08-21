@@ -15,7 +15,7 @@ export default function SignUp() {
 		email: '',
 		password: '',
 	});
-	const { signUp, message, isValidate } = useSignUp({ email, password });
+	const { signUp, isValidate } = useSignUp({ email, password });
 	const handleSubmit = () => signUp.mutate({ email, password });
 	return (
 		<Container component="main" maxWidth="xs">
@@ -69,7 +69,6 @@ export default function SignUp() {
 					>
 						회원 가입
 					</Button>
-					<Typography>{message}</Typography>
 				</Box>
 			</Box>
 		</Container>
