@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useInputMultiple } from '@/hooks';
 import { useSignUp } from '@/controller/auth/useSignUp';
+import Utils from '@/common/utils/utils';
 
 export default function SignUp() {
 	const [{ email, password }, onChange] = useInputMultiple({
@@ -64,6 +65,7 @@ export default function SignUp() {
 						fullWidth
 						variant="contained"
 						disabled={!isValidate}
+						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 						onClick={handleSubmit}
 						sx={{ mt: 3, mb: 2 }}
 					>

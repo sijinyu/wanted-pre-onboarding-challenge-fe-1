@@ -6,11 +6,11 @@ import {
 	Button,
 	Typography,
 	Stack,
-	Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useInputMultiple } from '@/hooks';
 import { useSignIn } from '@/controller/auth/useSignIn';
+import Utils from '@/common/utils/utils';
 
 export default function SignIn() {
 	const navigate = useNavigate();
@@ -64,6 +64,7 @@ export default function SignIn() {
 						disabled={!isValidate}
 						type="submit"
 						fullWidth
+						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 						onClick={handleSubmit}
 						color="primary"
 						variant="contained"
