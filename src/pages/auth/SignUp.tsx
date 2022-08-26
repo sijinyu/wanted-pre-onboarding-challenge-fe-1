@@ -43,20 +43,21 @@ export default function SignUp() {
 								id="email"
 								label="이메일을 형식에 맞춰 입력 해주세요."
 								name="email"
+								onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 								onChange={onChange}
 								autoComplete="email"
 							/>
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
+								type="password"
 								required
 								fullWidth
+								id="password"
 								name="password"
 								label="패스워드를 입력 해주세요. (8자 이상)"
-								type="password"
-								id="password"
+								onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 								onChange={onChange}
-								autoComplete="new-password"
 							/>
 						</Grid>
 					</Grid>
@@ -65,7 +66,6 @@ export default function SignUp() {
 						fullWidth
 						variant="contained"
 						disabled={!isValidate}
-						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 						onClick={handleSubmit}
 						sx={{ mt: 3, mb: 2 }}
 					>

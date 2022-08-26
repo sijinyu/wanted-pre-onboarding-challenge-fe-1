@@ -1,9 +1,10 @@
 import { KeyboardEvent } from 'react';
 
 const enterKeyEvent = (
-	e: KeyboardEvent<HTMLButtonElement>,
+	e: KeyboardEvent<HTMLDivElement>,
 	submit: () => void,
 ) => {
+	console.log(e.key, '--');
 	if (e.key === 'Enter') {
 		submit();
 	}

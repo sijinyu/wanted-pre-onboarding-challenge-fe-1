@@ -47,24 +47,25 @@ export default function SignIn() {
 						label="이메일을 입력하세요."
 						name="email"
 						onChange={onChange}
+						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 						autoComplete="email"
 						autoFocus
 					/>
 					<TextField
+						type="password"
 						margin="normal"
 						required
 						fullWidth
+						id="password"
 						name="password"
 						label="비밀번호를 입력하세요."
-						type="password"
-						id="password"
 						onChange={onChange}
+						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 					/>
 					<Button
 						disabled={!isValidate}
 						type="submit"
 						fullWidth
-						onKeyUp={e => Utils.enterKeyEvent(e, handleSubmit)}
 						onClick={handleSubmit}
 						color="primary"
 						variant="contained"
